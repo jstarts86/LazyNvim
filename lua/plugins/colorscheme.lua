@@ -8,4 +8,5 @@ return {
       styles = { sidebars = "transparent", floats = "transparent" },
     },
   },
+  { "typicode/bg.nvim", lazy = false },
 }
