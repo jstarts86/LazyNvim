@@ -1,17 +1,21 @@
-return {
-
-  {
-    "nvim-telescope/telescope.nvim",
-    opts = {
-      defaults = {
-        layout_strategy = "horizontal",
-        layout_config = {
-          horizontal = {
-            prompt_position = "bottom",
-          },
-        },
-        sorting_strategy = "ascending",
-      },
-    },
-  },
-}
+-- return {
+--
+--   {
+--     "nvim-telescope/telescope.nvim",
+--     dependencies = { "nvim-lua/plenary.nvim" },
+--     opts = {
+--       defaults = {
+--         layout_strategy = "horizontal",
+--         layout_config = {
+--           horizontal = {
+--             prompt_position = "bottom",
+--           },
+--           vertical = {
+--             mirror = true,
+--           },
+--         },
+--         sorting_strategy = "ascending",
+--       },
+--     },
+--   },
+-- }
