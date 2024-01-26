@@ -1,21 +1,9 @@
--- return {
---
---   {
---     "nvim-telescope/telescope.nvim",
---     dependencies = { "nvim-lua/plenary.nvim" },
---     opts = {
---       defaults = {
---         layout_strategy = "horizontal",
---         layout_config = {
---           horizontal = {
---             prompt_position = "bottom",
---           },
---           vertical = {
---             mirror = true,
---           },
---         },
---         sorting_strategy = "ascending",
---       },
---     },
---   },
--- }
+return {
+
+  {
+    "nvim-telescope/telescope.nvim",
+    keys = {
+      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files (cwd)" },
+    },
+  },
+}
