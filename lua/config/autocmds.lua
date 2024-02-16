@@ -8,9 +8,14 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.wo.conceallevel = 0
   end,
 })
-
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "html", "css", "js", "ts" },
+  pattern = { "markdown" },
+  callback = function()
+    vim.wo.conceallevel = 1
+  end,
+})
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "html", "css", "js", "ts", "lua" },
   callback = function()
     vim.opt.tabstop = 2
     vim.opt.softtabstop = 2
