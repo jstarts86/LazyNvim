@@ -13,10 +13,20 @@ vim.g.minipairs_disable = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+
+
+local undodir = os.getenv("HOME") .. "/.vim/undodir"
+if not vim.fn.isdirectory(undodir) then
+    vim.fn.mkdir(undodir, "p")
+end
+vim.opt.undodir = undodir
 vim.opt.undofile = true
 
 vim.opt.scrolloff = 9
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 -- vim.opt.conceallevel = 2
+vim.g.python3_host_prog = vim.fn.exepath('/opt/anaconda3/bin/python')
+vim.g.loaded_python3_provider = nil
+
+vim.cmd('runtime! plugin/rplugin.vim')
