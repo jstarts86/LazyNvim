@@ -44,6 +44,12 @@ vim.g.molten_virt_text_output = true
 
 -- this will make it so the output shows up below the \`\`\` cell delimiter
 vim.g.molten_virt_lines_off_by_1 = true
+IsLinux = function()
+  return jit.os == "Linux"
+end
 
+MarkdownMode = function()
+  return vim.g.started_by_firenvim or vim.env["MD_MODE"] == "1"
+end
 
 vim.cmd('runtime! plugin/rplugin.vim')
