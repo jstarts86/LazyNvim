@@ -3,19 +3,19 @@ return {
     "GCBallesteros/NotebookNavigator.nvim",
     keys = {
       {
-        "]h",
+        "<leader>rj",
         function()
           require("notebook-navigator").move_cell("d")
         end,
       },
       {
-        "[h",
+        "<leader>rk",
         function()
           require("notebook-navigator").move_cell("u")
         end,
       },
-      { "<leader>R", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
-      { "<leader>r", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
+      -- { "<leader>rc", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
+      { "<leader>rm", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
     },
     dependencies = {
       "echasnovski/mini.comment",
@@ -27,7 +27,7 @@ return {
     event = "VeryLazy",
     config = function()
       local nn = require("notebook-navigator")
-      nn.setup({ activate_hydra_keys = "<leader>h" })
+      nn.setup({ activate_hydra_keys = "<leader>hh" })
     end,
   },
 }
