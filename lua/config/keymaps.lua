@@ -14,14 +14,14 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- keymap.set("n", "K", ":m '<-2<CR>gv=gv")
 --
 -- Molten
-keymap.set("n", "<leader>ri", ":MoltenInit<CR>", { silent = true, desc = "Initialize the plugin" })
-keymap.set("n", "<leader>re", ":MoltenEvaluateOperator<CR>",{ silent = true, desc = "run operator selection" })
-keymap.set("n", "<leader>rl", ":MoltenEvaluateLine<CR>", { silent = true, desc = "evaluate line" })
-keymap.set("n", "<leader>rR", ":MoltenReevaluateCell<CR>", { silent = true, desc = "re-evaluate cell" })
-keymap.set("v", "<leader>r", ":<C-u>MoltenEvaluateVisual<CR>gv", { silent = true, desc = "evaluate visual selection" })
-keymap.set("n", "<leader>rd", ":MoltenDelete<CR>", { silent = true, desc = "molten delete cell" })
-keymap.set("n", "<leader>rh", ":MoltenHideOutput<CR>", { silent = true, desc = "hide output" })
-keymap.set("n", "<leader>ros", ":noautocmd MoltenEnterOutput<CR>", { silent = true, desc = "show/enter output" })
+-- keymap.set("n", "<leader>ri", ":MoltenInit<CR>", { silent = true, desc = "Initialize the plugin" })
+-- keymap.set("n", "<leader>re", ":MoltenEvaluateOperator<CR>",{ silent = true, desc = "run operator selection" })
+-- keymap.set("n", "<leader>rl", ":MoltenEvaluateLine<CR>", { silent = true, desc = "evaluate line" })
+-- keymap.set("n", "<leader>rR", ":MoltenReevaluateCell<CR>", { silent = true, desc = "re-evaluate cell" })
+-- keymap.set("v", "<leader>r", ":<C-u>MoltenEvaluateVisual<CR>gv", { silent = true, desc = "evaluate visual selection" })
+-- keymap.set("n", "<leader>rd", ":MoltenDelete<CR>", { silent = true, desc = "molten delete cell" })
+-- keymap.set("n", "<leader>rh", ":MoltenHideOutput<CR>", { silent = true, desc = "hide output" })
+-- keymap.set("n", "<leader>ros", ":noautocmd MoltenEnterOutput<CR>", { silent = true, desc = "show/enter output" })
 --
 --
 -- local runner = require("quarto.runner")
