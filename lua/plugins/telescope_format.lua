@@ -16,7 +16,7 @@ return {
       }
     end,
     keys = {
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files (cwd)" },
+      -- { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files (cwd)" },
       {
         "<leader>fa",
         desc = "choose the anaconda environment",
