@@ -4,7 +4,7 @@ return {
   opts = {
     -- Your options go here
     name = "venv",
-    -- auto_refresh = false
+    auto_refresh = false
   },
   event = 'VeryLazy', -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
   keys = {
@@ -13,4 +13,5 @@ return {
     -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
     { '<leader>vc', '<cmd>VenvSelectCached<cr>' },
   },
+    
 }
