@@ -26,7 +26,7 @@ vim.opt.colorcolumn = "80"
 -- vim.opt.conceallevel = 2
 vim.g.python3_host_prog = vim.fn.exepath('/opt/anaconda3/bin/python')
 vim.g.loaded_python3_provider = nil
--- vim.g.lazyvim_python_lsp = "pyright"
+vim.g.lazyvim_python_lsp = "basedpyright"
 
 -- I find auto open annoying, keep in mind setting this option will require setting
 -- a keybind for `:noautocmd MoltenEnterOutput` to open the output again
