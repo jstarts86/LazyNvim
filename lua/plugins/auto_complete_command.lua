@@ -46,6 +46,24 @@ return {
           end
         end, { "i", "s" }),
       })
+      table.insert(opts.sources, { name = "emoji" })
+      vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+      opts.window = {
+        completion = {
+          border = "rounded",
+          winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None",
+          scrollbar = false,
+          winblend = 0,
+        },
+        documentation = {
+          border = "rounded",
+          winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None",
+          scrollbar = false,
+          winblend = 0,
+        },
+        error,
+      }
     end,
   },
 }
