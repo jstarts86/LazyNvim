@@ -9,7 +9,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.g.autoformat = false
-vim.g.minipairs_disable = true
+-- vim.g.minipairs_disable = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -26,7 +26,7 @@ vim.opt.colorcolumn = "80"
 -- vim.opt.conceallevel = 2
 vim.g.python3_host_prog = vim.fn.exepath('/opt/anaconda3/bin/python')
 vim.g.loaded_python3_provider = nil
-vim.g.lazyvim_python_lsp = "basedpyright"
+-- vim.g.lazyvim_python_lsp = "basedpyright"
 
 -- I find auto open annoying, keep in mind setting this option will require setting
 -- a keybind for `:noautocmd MoltenEnterOutput` to open the output again
