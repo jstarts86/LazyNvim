@@ -28,6 +28,8 @@ vim.g.python3_host_prog = vim.fn.exepath('/opt/anaconda3/bin/python')
 vim.g.loaded_python3_provider = nil
 -- vim.g.lazyvim_python_lsp = "basedpyright"
 
+vim.g.snacks_animate = false
+
 -- I find auto open annoying, keep in mind setting this option will require setting
 -- a keybind for `:noautocmd MoltenEnterOutput` to open the output again
 -- vim.g.molten_auto_open_output = false
