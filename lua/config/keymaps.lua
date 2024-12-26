@@ -1,8 +1,9 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
---
+-- keymaps.lua
 
+local map = vim.keymap.set
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
@@ -10,6 +11,24 @@ local opts = { noremap = true, silent = true }
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+
+Snacks.toggle.option("showtabline", {
+    off = 0, -- Tabline is off by default
+    on = 2,  -- Enable tabline explicitly when toggled
+    name = "mine Tabline"
+}):map("<leader>uA")
+
+-- Function to toggle the tabline
+-- local function toggle_tabline()
+--   if vim.o.showtabline == 0 then
+--     vim.o.showtabline = 2  -- Always show tabline
+--   else
+--     vim.o.showtabline = 0  -- Never show tabline
+--   end
+-- end
+
+-- Map the toggle function to a keybinding (e.g., <leader>bt)
+-- map("n", "<leader>uA", toggle_tabline, { desc = "Toggle Tabline" })
 -- keymap.set("n", "J", ":m '>+1<CR>gv=gv")
 -- keymap.set("n", "K", ":m '<-2<CR>gv=gv")
 --

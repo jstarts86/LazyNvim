@@ -1,6 +1,7 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
+-- options.lua
 vim.opt.guicursor = ""
 
 vim.opt.tabstop = 4
@@ -14,7 +15,6 @@ vim.g.autoformat = false
 vim.opt.swapfile = false
 vim.opt.backup = false
 
-
 local undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 vim.opt.undodir = undodir
@@ -24,12 +24,13 @@ vim.opt.scrolloff = 9
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 -- vim.opt.conceallevel = 2
-vim.g.python3_host_prog = vim.fn.exepath('/opt/anaconda3/bin/python')
+vim.g.python3_host_prog = vim.fn.exepath("/opt/anaconda3/bin/python")
 vim.g.loaded_python3_provider = nil
 -- vim.g.lazyvim_python_lsp = "basedpyright"
 
 vim.g.snacks_animate = false
 
+vim.o.showtabline = 0
 -- I find auto open annoying, keep in mind setting this option will require setting
 -- a keybind for `:noautocmd MoltenEnterOutput` to open the output again
 -- vim.g.molten_auto_open_output = false
