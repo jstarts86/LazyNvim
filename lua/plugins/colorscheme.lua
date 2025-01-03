@@ -9,6 +9,17 @@ return {
         styles = {
           transparency = true,
         },
+        pallete = {
+          main = {
+            base = '#131313',
+            highlight_low = '#131313'
+          },
+
+          moon = {
+            base = '#131313',
+            highlight_low = '#131313',
+          },
+        },
       })
     end,
   },

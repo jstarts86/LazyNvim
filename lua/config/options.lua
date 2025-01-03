@@ -23,6 +23,7 @@ vim.opt.undofile = true
 vim.opt.scrolloff = 9
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
+vim.o.cursorlineopt = "number"
 -- vim.opt.conceallevel = 2
 vim.g.python3_host_prog = vim.fn.exepath("/opt/anaconda3/bin/python")
 vim.g.loaded_python3_provider = nil

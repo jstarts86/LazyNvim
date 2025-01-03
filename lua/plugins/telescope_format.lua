@@ -24,6 +24,15 @@ return {
           require("telescope").extensions.conda.conda({})
         end,
       },
+      {
+        "<leader>fd",
+        desc = "flutter commands",
+        function()
+          require('telescope').extensions.flutter.commands()
+        end,
+      },
+
     },
+
  },
 }
