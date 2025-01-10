@@ -17,6 +17,7 @@ vim.opt.backup = false
 
 local undodir = os.getenv("HOME") .. "/.vim/undodir"
 
+-- vim.g.maplocalleader = " "
 vim.opt.undodir = undodir
 vim.opt.undofile = true
 

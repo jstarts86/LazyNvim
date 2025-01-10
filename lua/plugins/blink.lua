@@ -1,124 +1,125 @@
 return {
-    "saghen/blink.cmp",
-    dependencies = {
-        "mikavilpas/blink-ripgrep.nvim",
+  "saghen/blink.cmp",
+  dependencies = {
+    "mikavilpas/blink-ripgrep.nvim",
+  },
+  lazy = false, -- lazy loading handled internally
+
+  -- use a release tag to download pre-built binaries
+  -- version = "v0.*",
+
+  opts = {
+    keymap = {
+      ["<C-j>"] = { "select_next", "snippet_forward", "fallback" },
+      ["<C-k>"] = { "select_prev", "snippet_backward", "fallback" },
+      ["<CR>"] = { "accept", "fallback" },
+      ["<C-e>"] = { "show", "show_documentation", "hide_documentation", "fallback" },
+      ["<C-c>"] = { "cancel", "fallback" },
+
+      ["<Up>"] = {},
+      ["<Down>"] = {},
     },
-    lazy = false, -- lazy loading handled internally
 
-    -- use a release tag to download pre-built binaries
-    version = "v0.*",
+    completion = {
+      menu = {
+        border = "rounded",
+        -- scrollbar = false,
+        winhighlight = "Normal:NormalFloat,FloatBorder:NormalFloat",
+        draw = {
+          padding = 0,
+          columns = { { "label" }, { "kind_icon" } },
+        },
+      },
 
-    opts = {
-        keymap = {
-            ["<C-j>"] = { "select_next", "snippet_forward", "fallback" },
-            ["<C-k>"] = { "select_prev", "snippet_backward", "fallback" },
-            ["<CR>"] = { "accept", "fallback" },
-            ["<C-e>"] = { "show", "show_documentation", "hide_documentation", "fallback" },
-            ["<Up>"] = {},
-            ["<Down>"] = {},
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 200,
+        window = {
+          border = "rounded",
+        },
+      },
+
+      list = {
+        selection = { preselect = false, auto_insert = true },
+      },
+
+      -- ghost_text = {
+      --     enabled = false,
+      -- }
+    },
+
+    appearance = {
+      -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+      -- Useful for when your theme doesn't support blink.cmp
+      -- will be removed in a future release
+      use_nvim_cmp_as_default = true,
+      -- Set to "mono" for "Nerd Font Mono" or "normal" for "Nerd Font"
+      -- Adjusts spacing to ensure icons are aligned
+      nerd_font_variant = "mono",
+    },
+
+    -- default list of enabled providers defined so that you can extend it
+    -- elsewhere in your config, without redefining it, via `opts_extend`
+    sources = {
+      default = { "lsp", "lazydev", "ripgrep" },
+      providers = {
+        buffer = { enabled = false },
+        snippets = { enabled = false },
+        lazydev = {
+          name = "LazyDev",
+          enabled = true,
+          module = "lazydev.integrations.blink",
+        },
+        lsp = {
+          transform_items = function(_, items)
+            return vim.tbl_filter(function(item)
+              local types = require("blink.cmp.types").CompletionItemKind
+              local kind = item.kind
+              return kind ~= types.Text and kind ~= types.Snippet
+            end, items)
+          end,
+        },
+        ripgrep = {
+          module = "blink-ripgrep",
+          enabled = true,
+          name = "Ripgrep",
+          -- the options below are optional, some default values are shown
+          opts = {
+            -- For many options, see `rg --help` for an exact description of
+            -- the values that ripgrep expects.
+
+            -- the minimum length of the current word to start searching
+            -- (if the word is shorter than this, the search will not start)
+            prefix_min_len = 3,
+
+            -- The number of lines to show around each match in the preview window.
+            -- For example, 5 means to show 5 lines before, then the match, and
+            -- another 5 lines after the match.
+            context_size = 5,
+
+            -- The maximum file size that ripgrep should include in its search.
+            -- Useful when your project contains large files that might cause
+            -- performance issues.
+            -- Examples: "1024" (bytes by default), "200K", "1M", "1G"
+            max_filesize = "1M",
+
+            -- (advanced) Any additional options you want to give to ripgrep.
+            -- See `rg -h` for a list of all available options. Might be
+            -- helpful in adjusting performance in specific situations.
+            -- If you have an idea for a default, please open an issue!
+            --
+            -- Not everything will work (obviously).
+            additional_rg_options = {},
+          },
         },
 
-        completion = {
-            menu = {
-                border = "rounded",
-                -- scrollbar = false,
-                winhighlight = "Normal:NormalFloat,FloatBorder:NormalFloat",
-                draw = {
-                    padding = 0,
-                    columns = { { "label" }, { "kind_icon" } },
-                }
-            },
+        -- TODO:
+        -- stop prompting autocomplete on symbols (, ;...)
+        -- make lazydev work
+      },
 
-            documentation = {
-                auto_show = true,
-                auto_show_delay_ms = 200,
-                window = {
-                    border = "rounded",
-
-                }
-            },
-
-            list = {
-                selection = "manual",
-            },
-
-            -- ghost_text = {
-            --     enabled = false,
-            -- }
-        },
-
-        appearance = {
-            -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-            -- Useful for when your theme doesn't support blink.cmp
-            -- will be removed in a future release
-            use_nvim_cmp_as_default = true,
-            -- Set to "mono" for "Nerd Font Mono" or "normal" for "Nerd Font"
-            -- Adjusts spacing to ensure icons are aligned
-            nerd_font_variant = "mono"
-        },
-
-        -- default list of enabled providers defined so that you can extend it
-        -- elsewhere in your config, without redefining it, via `opts_extend`
-        sources = {
-            default = { "lsp", "lazydev", "ripgrep" },
-            providers = {
-                buffer = { enabled = false },
-                snippets = { enabled = false },
-                lazydev = {
-                    name = "LazyDev",
-                    enabled = true,
-                    module = "lazydev.integrations.blink"
-                },
-                lsp = {
-                    transform_items = function (_, items)
-                        return vim.tbl_filter(function(item)
-                            local types = require('blink.cmp.types').CompletionItemKind
-                            local kind = item.kind
-                            return kind ~= types.Text and kind ~= types.Snippet
-                        end, items)
-                    end
-                },
-                ripgrep = {
-                    module = "blink-ripgrep",
-                    enabled = true,
-                    name = "Ripgrep",
-                    -- the options below are optional, some default values are shown
-                    opts = {
-                        -- For many options, see `rg --help` for an exact description of
-                        -- the values that ripgrep expects.
-
-                        -- the minimum length of the current word to start searching
-                        -- (if the word is shorter than this, the search will not start)
-                        prefix_min_len = 3,
-
-                        -- The number of lines to show around each match in the preview window.
-                        -- For example, 5 means to show 5 lines before, then the match, and
-                        -- another 5 lines after the match.
-                        context_size = 5,
-
-                        -- The maximum file size that ripgrep should include in its search.
-                        -- Useful when your project contains large files that might cause
-                        -- performance issues.
-                        -- Examples: "1024" (bytes by default), "200K", "1M", "1G"
-                        max_filesize = "1M",
-
-                        -- (advanced) Any additional options you want to give to ripgrep.
-                        -- See `rg -h` for a list of all available options. Might be
-                        -- helpful in adjusting performance in specific situations.
-                        -- If you have an idea for a default, please open an issue!
-                        --
-                        -- Not everything will work (obviously).
-                        additional_rg_options = {}
-                    },
-                },
-
-                -- TODO:
-                -- stop prompting autocomplete on symbols (, ;...)
-                -- make lazydev work
-            },
-
-            -- experimental signature help support
-        },
+      -- experimental signature help support
+    },
     -- signature = {
     --   enabled = true,
     --   window = {
@@ -126,5 +127,5 @@ return {
     --     winhighlight = "Normal:NormalFloat,FloatBorder:NormalFloat",
     --   }
     -- }
-    }
+  },
 }
