@@ -14,7 +14,7 @@ vim.g.autoformat = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-
+vim.opt.foldmethod = "manual"
 local undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 -- vim.g.maplocalleader = " "

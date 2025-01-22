@@ -30,11 +30,11 @@ return {
               args = { "flutter" },
             }
 
-            -- require("dap").adapters.flutter = {
-            --   type = "executable",
-            --     command = vim.fn.stdpath('data')..'/mason/bin/dart-debug-adapter',
-            --   args = {"flutter"}
-            -- }
+            require("dap").adapters.flutter = {
+              type = "executable",
+                command = vim.fn.stdpath('data')..'/mason/bin/dart-debug-adapter',
+              args = {"flutter"}
+            }
 
             require("dap").configurations.dart = {
               {
