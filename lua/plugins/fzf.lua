@@ -15,7 +15,8 @@ return {
       }
     end,
     keys = {
-      { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" }
+      { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      { "<leader>C", "<cmd>FzfLua commands<cr>", desc = "Commands" }
     }
   },
 }
