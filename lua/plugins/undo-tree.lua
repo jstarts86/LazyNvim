@@ -3,7 +3,7 @@ return {
     "mbbill/undotree",
     keys = {
       { -- lazy style key map
-        "<leader>o",
+        "<leader>O",
         "<cmd>UndotreeToggle<CR>",
         desc = "undo history",
       },
