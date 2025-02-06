@@ -10,14 +10,30 @@ return {
 
   opts = {
     keymap = {
-      ["<C-j>"] = { "select_next", "snippet_forward", "fallback" },
-      ["<C-k>"] = { "select_prev", "snippet_backward", "fallback" },
-      ["<CR>"] = { "accept", "fallback" },
-      ["<C-e>"] = { "show", "show_documentation", "hide_documentation", "fallback" },
-      ["<C-c>"] = { "cancel", "fallback" },
+      -- ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+      -- ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+      -- ["<CR>"] = { "accept", "fallback" },
+      -- ["<C-e>"] = { "show", "show_documentation", "hide_documentation", "fallback" },
+      -- ["<C-c>"] = { "cancel", "fallback" },
+      --
+      -- ["<Up>"] = {},
+      -- ["<Down>"] = {},
 
-      ["<Up>"] = {},
-      ["<Down>"] = {},
+      -- ["<Tab>"] = { "snippet_forward", "fallback" },
+      -- ["<S-Tab>"] = { "snippet_backward", "fallback" },
+
+      ["<C-p>"] = { "select_next", "snippet_forward", "fallback" },
+      ["<C-n>"] = { "select_prev", "snippet_backward", "fallback" },
+      ["<Up>"] = { "select_prev", "fallback" },
+      ["<Down>"] = { "select_next", "fallback" },
+      -- ["<C-p>"] = { "select_prev", "fallback" },
+      -- ["<C-n>"] = { "select_next", "fallback" },
+
+      ["<C-k>"] = { "scroll_documentation_up", "fallback" },
+      ["<C-j>"] = { "scroll_documentation_down", "fallback" },
+
+      ["<C-e>"] = { "show", "show_documentation", "hide_documentation", "fallback" },
+      ["<C-c>"] = { "hide", "fallback" },
     },
 
     completion = {

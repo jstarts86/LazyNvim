@@ -33,6 +33,8 @@ vim.g.loaded_python3_provider = nil
 vim.g.snacks_animate = false
 
 vim.o.showtabline = 0
+-- Motivation: Less clutter in completion windows and a more direct usage of snippits
+vim.g.lazyvim_mini_snippets_in_completion = true
 -- I find auto open annoying, keep in mind setting this option will require setting
 -- a keybind for `:noautocmd MoltenEnterOutput` to open the output again
 -- vim.g.molten_auto_open_output = false
