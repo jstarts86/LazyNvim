@@ -1,3 +1,9 @@
 return {
-  -- "daeyun/vim-matlab"
+  -- -- Matlab support for Neovim
+  -- {
+  --   "daeyun/vim-matlab",
+  --   build = function()
+  --     vim.cmd("UpdateRemotePlugins")
+  --   end,
+  -- },
 }
