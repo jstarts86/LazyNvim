@@ -1,0 +1,25 @@
+return {
+  "nvimdev/dashboard-nvim",
+  optional = true,
+  opts = function(_, opts)
+    -- Add workspaces button to the existing center array
+    table.insert(opts.config.center, 4, { -- Insert at position 4 (after Find Text)
+      action = "Telescope workspaces",
+      desc = " Workspaces",
+      icon = " ",
+      key = "w",
+    })
+    
+    -- Reapply the spacing/formatting for all buttons to ensure consistency
+    for _, button in ipairs(opts.config.center) do
+      button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
+      button.key_format = "  %s"
+    end
+    
+    return opts
+  end,
+  dependencies = {
+    {"natecraddock/workspaces.nvim"},
+    {"nvim-telescope/telescope.nvim"}
+  }
+}
