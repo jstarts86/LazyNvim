@@ -1,7 +1,7 @@
 return {
   {
     "rose-pine/neovim",
-    name = "rose-pine",
+    name = "rose-pine-main",
     config = function()
       vim.cmd("colorscheme rose-pine")
       require("rose-pine").setup({
@@ -26,7 +26,7 @@ return {
     {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = "rose-pine",
+            colorscheme = "rose-pine-main",
         },
     }
 }
