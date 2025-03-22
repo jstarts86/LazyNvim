@@ -11,6 +11,7 @@ local opts = { noremap = true, silent = true }
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+keymap.set("i", "<c-y>", "<cmd>call augment#Accept()<cr>")
 
 Snacks.toggle.option("showtabline", {
     off = 0, -- Tabline is off by default
