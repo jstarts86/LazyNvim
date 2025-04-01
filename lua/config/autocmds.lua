@@ -31,4 +31,35 @@ function ColorMyPencils(color)
 
 end
 
+
+local highlight_group = vim.api.nvim_create_augroup("CustomHighlightOverrides", { clear = true })
+
+-- Apply ALL custom highlights after the colorscheme has loaded
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = highlight_group,
+  pattern = "*", -- Apply to any colorscheme set by LazyVim
+  desc = "Apply custom highlights after colorscheme loads",
+  callback = function()
+    -- Apply transparency settings
+    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
+    -- Define your desired visual selection background color
+    local visual_bg = "#56526e" -- Example: A medium grey
+    -- Or pick a color from the Rosé Pine palette, e.g., highlight_med
+    -- local visual_bg = "#56526e" -- Rosé Pine Moon/Main highlight_med
+
+    -- Override the Visual highlight group
+    vim.api.nvim_set_hl(0, "Visual", {
+      bg = visual_bg,
+      -- fg = nil, -- Keep default foreground (usually best)
+      -- bold = false, -- Ensure no bold unless desired
+      -- italic = false, -- Ensure no italic unless desired
+    })
+
+    -- Add any other highlight overrides here in the future
+    -- e.g., vim.api.nvim_set_hl(0, "Comment", { fg = "#908caa", italic = true })
+  end,
+})
+
 ColorMyPencils()

@@ -12,12 +12,12 @@ return {
         pallete = {
           main = {
             base = '#131313',
-            highlight_low = '#131313'
+            highlight_low = '#1f1f1f'
           },
 
           moon = {
             base = '#131313',
-            highlight_low = '#131313',
+            highlight_low = '#1f1f1f',
           },
         },
       })
