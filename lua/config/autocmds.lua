@@ -34,7 +34,6 @@ end
 
 local highlight_group = vim.api.nvim_create_augroup("CustomHighlightOverrides", { clear = true })
 
--- Apply ALL custom highlights after the colorscheme has loaded
 vim.api.nvim_create_autocmd("ColorScheme", {
   group = highlight_group,
   pattern = "*", -- Apply to any colorscheme set by LazyVim
@@ -62,4 +61,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  pattern = "*.pde",
+  command = "set filetype=java"
+})
 ColorMyPencils()

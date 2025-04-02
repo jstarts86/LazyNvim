@@ -19,6 +19,18 @@ return {
           }
         },
       },
+    --   processing = { -- Add Processing LSP
+    --     filetypes = { "processing" },
+    --     root_dir = function(fname)
+    --       return vim.loop.cwd() -- Or another appropriate root directory function
+    --     end,
+    --     cmd = {
+    --       "java",
+    --       "-jar",
+    --       "/path/to/processing-ls.jar"  -- Replace with the actual path to your JAR
+    --     },
+    --   },
+    -- },
     },
     setup = {
       jdtls = function()

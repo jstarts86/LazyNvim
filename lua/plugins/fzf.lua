@@ -8,15 +8,19 @@ return {
         files = {
           cwd_prompt = false,
           actions = {
-            ["alt-."] = { actions.toggle_ignore },
-            ["alt-;"] = { actions.toggle_hidden },
+            ["ctrl-x"] = { fn = actions.toggle_ignore, reload = true },
+            ["ctrl-h"] = { fn = actions.toggle_hidden, reload = true },
+            -- ["ctrl-t"] = { fn = actions.file_edit },
+            -- ["ctrl-s"] = { fn = actions.file_sel_to_qf, reload = true },
+            -- ["ctrl-p"] = { fn = actions.file_switch, reload = true}
+            -- ["ctrl-p"] = { fn = actions.toggle_preview_focus },
           },
         },
       }
     end,
     keys = {
       { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
-      { "<leader>C", "<cmd>FzfLua commands<cr>", desc = "Commands" }
-    }
+      { "<leader>C", "<cmd>FzfLua commands<cr>", desc = "Commands" },
+    },
   },
 }

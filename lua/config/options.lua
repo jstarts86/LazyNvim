@@ -39,9 +39,16 @@ vim.o.showtabline = 0
 vim.g.lazyvim_mini_snippets_in_completion = true
 -- vim.opt.autochdir = true
 vim.g.root_spec = {  "cwd" }
-vim.g.augment_workspace_folders = {'/Users/john/Coding/BackendProjects/hardware'}
+vim.g.augment_workspace_folders = {
+  '/Users/john/Coding/BackendProjerts/hardware',
+  '/Users/john/coding/IdeaProjects/ITCLab1',
+  '/Users/john/.config/nvim/'
+}
 vim.g.augment_suggestions_disabled = true
-vim.g.augment_disable_tab_mapping = false
+vim.g.augment_diable_completions = true
+vim.g.augment_disable_tab_mapping = true
+
+
 -- I find auto open annoying, keep in mind setting this option will require setting
 -- a keybind for `:noautocmd MoltenEnterOutput` to open the output again
 -- vim.g.molten_auto_open_output = false
