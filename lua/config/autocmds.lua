@@ -40,11 +40,12 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   desc = "Apply custom highlights after colorscheme loads",
   callback = function()
     -- Apply transparency settings
-    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+        vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 
     -- Define your desired visual selection background color
-    local visual_bg = "#56526e" -- Example: A medium grey
+    local visual_bg = "#063970" -- Example: A medium grey
+    -- local lsp_ref_bg = "#393552"
     -- Or pick a color from the Rosé Pine palette, e.g., highlight_med
     -- local visual_bg = "#56526e" -- Rosé Pine Moon/Main highlight_med
 
@@ -55,14 +56,19 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       -- bold = false, -- Ensure no bold unless desired
       -- italic = false, -- Ensure no italic unless desired
     })
+    -- vim.api.nvim_set_hl(0, "LspReferenceText", { bg = lsp_ref_bg })
+    -- vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = lsp_ref_bg })
+    -- vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = lsp_ref_bg })
+    -- -- DocumentHighlight is often linked to the above, but setting it ensures consistency
+    -- vim.api.nvim_set_hl(0, "DocumentHighlight", { bg = lsp_ref_bg }
 
     -- Add any other highlight overrides here in the future
     -- e.g., vim.api.nvim_set_hl(0, "Comment", { fg = "#908caa", italic = true })
   end,
 })
 
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
-  pattern = "*.pde",
-  command = "set filetype=java"
-})
-ColorMyPencils()
+-- vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+--   pattern = "*.pde",
+--   command = "set filetype=java"
+-- })
+-- ColorMyPencils()

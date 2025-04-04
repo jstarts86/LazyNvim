@@ -10,8 +10,7 @@ return {
   -- },
   {
     "rcarriga/nvim-notify",
-    enabled = false
-
+    enabled = false,
   }
 
 }
