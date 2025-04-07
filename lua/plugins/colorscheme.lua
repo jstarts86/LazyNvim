@@ -1,11 +1,13 @@
 return {
   {
     "rose-pine/neovim",
-    name = "rose-pine-main",
-    config = function()
-      vim.cmd("colorscheme rose-pine")
-      require("rose-pine").setup({
+    name = "rose-pine",
+    lazy = false,
+    opts = {
         disable_backround = true,
+        dark_variant = "moon",
+        variant = "dawn",
+        background = "light",
         styles = {
           transparency = true,
         },
@@ -41,13 +43,12 @@ return {
         -- Example using hex code:
         -- Keyword = { fg = "#c4a7e7", bold = true },
       }
-      })
-    end,
+    }
   },
     {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = "rose-pine-main",
+            colorscheme = "rose-pine-moon",
         },
     }
 }
