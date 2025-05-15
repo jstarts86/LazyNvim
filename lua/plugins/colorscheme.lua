@@ -4,29 +4,29 @@ return {
     name = "rose-pine",
     lazy = false,
     opts = {
-        disable_backround = true,
-        dark_variant = "moon",
-        variant = "dawn",
-        background = "light",
-        styles = {
-          transparency = true,
+      disable_backround = true,
+      background = "light",
+      variant = "dawn",
+      styles = {
+        transparency = true,
+      },
+      pallete = {
+        main = {
+          base = "#131313",
+          highlight_low = "#1f1f1f",
         },
-        pallete = {
-          main = {
-            base = '#131313',
-            highlight_low = '#1f1f1f'
-          },
 
-          moon = {
-            base = '#131313',
-            highlight_low = '#1f1f1f',
-          },
+        moon = {
+          base = "#131313",
+          highlight_low = "#1f1f1f",
         },
+      },
       highlight_groups = {
-        -- Override the Visual selection highlight group
         Visual = {
+          -- Override the Visual selection highlight group
           -- Choose your desired background color
           bg = "#063970", -- Example: Bright 'iris' from Rosé Pine palette
+          -- visual_bg = "#063970", -- Example: A medium greyb
           -- Other bright examples:
           -- bg = "#ebbcba", -- 'rose'
           -- bg = "#f6c177", -- 'gold'
@@ -42,13 +42,13 @@ return {
         -- Comment = { fg = "foam", italic = true },
         -- Example using hex code:
         -- Keyword = { fg = "#c4a7e7", bold = true },
-      }
-    }
+      },
+    },
   },
-    {
-        "LazyVim/LazyVim",
-        opts = {
-            colorscheme = "rose-pine-moon",
-        },
-    }
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "rose-pine-dawn",
+    },
+  },
 }

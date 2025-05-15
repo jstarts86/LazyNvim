@@ -53,3 +53,12 @@ Snacks.toggle.option("showtabline", {
 -- keymap.set("n", "<localleader>RA", function()
 --   runner.run_all(true)
 -- end, { desc = "run all cells of all languages", silent = true })
+keymap.set("n", "<leader>Md", function() -- "t" for theme, "rd" for rose-pine dawn
+  vim.cmd.colorscheme("rose-pine-dawn")
+  vim.notify("Theme: Rosé Pine Dawn", vim.log.levels.INFO, { title = "Colorscheme" })
+end, { noremap = true, silent = true, desc = "Theme: Rosé Pine Dawn" })
+
+keymap.set("n", "<leader>Mm", function() -- "t" for theme, "rd" for rose-pine dawn
+  vim.cmd.colorscheme("rose-pine-moon")
+  vim.notify("Theme: Rosé Pine Moon", vim.log.levels.INFO, { title = "Colorscheme" })
+end, { noremap = true, silent = true, desc = "Theme: Rosé Pine Moon" })

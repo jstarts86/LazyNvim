@@ -6,7 +6,6 @@ return {
     opts = {
       picker = {
         sources = {
-
           explorer = {
             enabled = true,
             layout = {
@@ -28,6 +27,9 @@ return {
       },
       words = {
         enabled = true,
+      },
+      keys = {
+      { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
       }
     },
   },
