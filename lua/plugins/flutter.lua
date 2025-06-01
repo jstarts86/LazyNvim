@@ -5,6 +5,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", "stevearc/dressing.nvim" },
     config = function()
       require("flutter-tools").setup({
+        fvm = true,
         --for windowns only
         -- flutter_path = "/Users/sadabwasim/Documents/development/flutter/bin/flutter.bat",
         ui = {

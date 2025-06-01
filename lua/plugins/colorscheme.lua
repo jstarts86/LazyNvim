@@ -6,7 +6,7 @@ return {
     opts = {
       disable_backround = true,
       background = "light",
-      variant = "dawn",
+      variant = "moon",
       styles = {
         transparency = true,
       },
@@ -48,7 +48,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "rose-pine-dawn",
+      colorscheme = "rose-pine-moon",
     },
   },
 }
