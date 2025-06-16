@@ -6,17 +6,17 @@ return {
     opts = {
       picker = {
         sources = {
-          -- explorer = {
-          --   enabled = true,
-          --   layout = {
-          --     preset = "sidebar",
-          --     preview = false,
-          --     layout = {
-          --       position = "right",
-          --     },
-          --   },
-          --   auto_close = true,
-          -- },
+          explorer = {
+            enabled = true,
+            layout = {
+              preset = "sidebar",
+              preview = false,
+              layout = {
+                position = "right",
+              },
+            },
+            auto_close = true,
+          },
         }
       },
       indent = {
