@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "html", "css", "js", "ts", "lua", "dart"},
+  pattern = { "html", "css", "js", "ts", "lua", "dart", "tsx", "jsx"},
   callback = function()
     vim.opt.tabstop = 2
     vim.opt.softtabstop = 2
