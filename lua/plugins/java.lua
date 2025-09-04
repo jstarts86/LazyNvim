@@ -1,4 +1,4 @@
-return {
+-- return {
   -- "nvim-java/nvim-java",
   -- config = false,
   -- dependencies = {
@@ -42,4 +42,19 @@ return {
   --     },
   --   },
   -- },
+-- }
+
+return {
+  "mfussenegger/nvim-jdtls",
+  opts = function(_, opts)
+    opts.handlers = vim.tbl_extend("force", opts.handlers or {}, {
+      ['language/status'] = function(_, result)
+        -- Print or whatever.
+      end,
+      ['$/progress'] = function(_, result, ctx)
+        -- disable progress updates.
+      end,
+    })
+    return opts
+  end,
 }

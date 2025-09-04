@@ -70,6 +70,17 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     -- e.g., vim.api.nvim_set_hl(0, "Comment", { fg = "#908caa", italic = true })
   end,
 })
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   callback = function(event)
+--     local client = vim.lsp.get_client_by_id(event.data.client_id)
+--     if client and client.name == "jdtls" then
+--       client.handlers['language/status'] = function(_, result)
+--       end
+--       client.handlers['$/progress'] = function(_, result, ctx)
+--       end
+--     end
+--   end,
+-- })
 
 -- vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
 --   pattern = "*.pde",
