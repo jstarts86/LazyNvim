@@ -35,6 +35,7 @@ vim.g.python3_host_prog = vim.fn.exepath("/opt/anaconda3/bin/python")
 vim.g.loaded_python3_provider = nil
 vim.g.lazyvim_python_lsp = "basedpyright"
 
+-- vim.lsp.handlers["textDocument/signatureHelp"] = function() end
 vim.g.snacks_animate = false
 
 vim.o.showtabline = 0

@@ -6,10 +6,12 @@ return {
     "saghen/blink.cmp",
     version = "*",
     dependencies = {
+      "rafamadriz/friendly-snippets",
       "moyiz/blink-emoji.nvim",
       "mikavilpas/blink-ripgrep.nvim",
+      "xzbdmw/colorful-menu.nvim",
     },
-    event = { "InsertEnter", "CmdlineEnter" },
+    event = { "InsertEnter"},
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -35,12 +37,45 @@ return {
         },
         menu = {
           draw = {
+            padding = 1,
             treesitter = { "lsp" },
+            gap = 2,
+            columns = { { "kind_icon" }, { "label", "kind", gap = 2 } },
+            components = {
+              label = {
+                width = { fill = true },
+                text = function(ctx)
+                  return require("colorful-menu").blink_components_text(ctx)
+                end,
+                highlight = function(ctx)
+                  return require("colorful-menu").blink_components_highlight(ctx)
+                end,
+              },
+              label_description = { width = { fill = true } },
+              kind_icon = {
+                text = function(ctx)
+                  local MiniIcons = require("mini.icons")
+                  local source = ctx.item.source_name
+                  local label = ctx.item.label
+                  local icon = source == "LSP" and MiniIcons.get("lsp", ctx.kind)
+                    or source == "copilot" and MiniIcons.get("filetype", source)
+                    or source == "Path" and (label:match("%.[^/]+$") and MiniIcons.get("file", label) or MiniIcons.get(
+                      "directory",
+                      ctx.item.label
+                    ))
+                    or ctx.kind_icon
+
+                  return icon .. " "
+                end,
+              },
+            },
           },
         },
         documentation = {
           auto_show = true,
-          auto_show_delay_ms = 200,
+          -- auto_show_delay_ms = 200,
+          treesitter_highlighting = true,
+          window = {},
         },
         ghost_text = {
           enabled = vim.g.ai_cmp,
@@ -48,7 +83,8 @@ return {
         -- Mirror: <CR> confirm with select = false (no preselect accept)
         list = {
           selection = {
-            preselect = false,
+            preselect = true,
+            auto_insert = false,
           },
         },
       },
@@ -59,13 +95,34 @@ return {
       sources = {
         -- enable nvim-cmp sources via blink.compat
         -- compat = { "emoji" },
-        default = { "lsp", "path", "snippets", "buffer", "dadbod", "emoji" },
+        default = { "lsp", "snippets", "path", "buffer", "dadbod", "emoji" },
         providers = {
+          lsp = {
+            name = "lsp",
+            enabled = true,
+            module = "blink.cmp.sources.lsp",
+            score_offset = 90,
+            -- When linking markdown notes, I would get snippets and text in the
+            -- suggestions, I want those to show only if there are no LSP
+            -- suggestions
+            -- Disabling fallbacks as my snippets wouldn't show up
+            -- Enabled fallbacks as this seems to be working now
+            -- fallbacks = { "buffer" },
+          },
+          snippets = {
+            name = "snippets",
+            opts = {},
+            enabled = true,
+            max_items = 8,
+            min_keyword_length = 2,
+            module = "blink.cmp.sources.snippets",
+            score_offset = 75,
+          },
           emoji = {
             -- Provided by moyiz/blink-emoji.nvim
             name = "emoji",
             module = "blink-emoji",
-            score_offset = 15, -- optional: boosts ranking
+            score_offset = 5, -- optional: boosts ranking
           },
         },
       },
@@ -84,7 +141,8 @@ return {
         },
       },
       signature = {
-        enabled = true,
+        enabled = false,
+        trigger = {},
         window = {
           show_documentation = true,
         },
@@ -97,14 +155,16 @@ return {
         -- Match your nvim-cmp mappings
         ["<C-n>"] = { "select_next" },
         ["<C-p>"] = { "select_prev" },
-        ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
-        ["<C-e>"] = { "hide", "fallback" },
+        ["<C-d>"] = { "show_documentation", "hide_documentation" },
+        ["<C-e>"] = { "show", "hide", "fallback" },
 
         -- Like your Shift+CR confirm replace
         -- ["<S-CR>"] = LazyVim.cmp.map({ "accept_and_replace" }),
-        ["<C-f>"] = { "scroll_signature_up", "fallback" },
-        ["<C-b>"] = { "scroll_signature_down", "fallback" },
+        -- ["<C-f>"] = { "scroll_signature_up", "fallback" },
+        -- ["<C-b>"] = { "scroll_signature_down", "fallback" },
 
+        ["<C-f>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-b>"] = { "scroll_documentation_down", "fallback" },
         -- default in all keymap presets
         ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
 
@@ -152,38 +212,6 @@ return {
         }
       end
 
-      -- Unset custom prop to pass blink.cmp validation
-      opts.sources.compat = nil
-
-      -- Preserve LazyVim kind overrides (default behavior)
-      for _, provider in pairs(opts.sources.providers or {}) do
-        ---@cast provider blink.cmp.SourceProviderConfig|{kind?:string}
-        if provider.kind then
-          local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-          local kind_idx = #CompletionItemKind + 1
-
-          CompletionItemKind[kind_idx] = provider.kind
-          ---@diagnostic disable-next-line: no-unknown
-          CompletionItemKind[provider.kind] = kind_idx
-
-          ---@type fun(ctx: blink.cmp.Context, items: blink.cmp.CompletionItem[]): blink.cmp.CompletionItem[]
-          local transform_items = provider.transform_items
-          ---@param ctx blink.cmp.Context
-          ---@param items blink.cmp.CompletionItem[]
-          provider.transform_items = function(ctx, items)
-            items = transform_items and transform_items(ctx, items) or items
-            for _, item in ipairs(items) do
-              item.kind = kind_idx or item.kind
-              item.kind_icon = LazyVim.config.icons.kinds[item.kind_name] or item.kind_icon or nil
-            end
-            return items
-          end
-
-          provider.kind = nil
-        end
-      end
-
-      -- Keep your transparent background preference
       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 

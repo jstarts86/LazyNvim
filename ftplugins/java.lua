@@ -1,0 +1,46 @@
+-- -- ~/.config/nvim/ftplugin/java.lua
+-- local jdtls = require("jdtls")
+--
+-- -- Ensure blink.cmp is available even before InsertEnter
+-- pcall(function()
+--   require("lazy").load({ plugins = { "blink.cmp" } })
+-- end)
+--
+-- local ok, blink = pcall(require, "blink.cmp")
+-- local capabilities = ok and blink.get_lsp_capabilities()
+--   or vim.lsp.protocol.make_client_capabilities()
+--
+-- local root = require("jdtls.setup").find_root({
+--   "gradlew",
+--   "mvnw",
+--   "pom.xml",
+--   ".git",
+-- })
+-- if not root or root == "" then
+--   return
+-- end
+--
+-- local project = vim.fn.fnamemodify(root, ":p:h:t")
+-- local cache = vim.fn.stdpath("cache")
+-- local data = vim.fn.stdpath("data")
+-- local lombok = data .. "/mason/share/jdtls/lombok.jar"
+--
+-- local cmd = {
+--   vim.fn.exepath("jdtls"),
+--   "--jvm-arg=-javaagent:" .. lombok,
+--   "-configuration",
+--   cache .. "/jdtls/" .. project .. "/config",
+--   "-data",
+--   cache .. "/jdtls/" .. project .. "/workspace",
+-- }
+--
+-- jdtls.start_or_attach({
+--   cmd = cmd,
+--   root_dir = root,
+--   capabilities = capabilities,
+--   settings = {
+--     java = {
+--       inlayHints = { parameterNames = { enabled = "all" } },
+--     },
+--   },
+-- })

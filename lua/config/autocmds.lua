@@ -87,3 +87,28 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 --   command = "set filetype=java"
 -- })
 -- ColorMyPencils()
+-- vim.api.nvim_create_autocmd("BufWinEnter", {
+--   callback = function(args)
+--     local bt = vim.bo[args.buf].buftype
+--     if bt == "nofile" and vim.bo[args.buf].filetype == "markdown" then
+--       pcall(vim.api.nvim_buf_call, args.buf, function()
+--         vim.opt_local.wrap = true
+--         vim.opt_local.linebreak = true
+--         vim.opt_local.textwidth = 0
+--         vim.opt_local.colorcolumn = ""
+--       end)
+--     end
+--   end,
+-- })
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "java",
+--   desc = "Setup jdtls",
+--   callback = function()
+--     require("jdtls").start_or_attach({
+--       capabilities = require("blink.cmp").get_lsp_capabilities(),
+--       cmd = { "jdtls" },
+--       root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
+--     })
+--   end,
+-- })

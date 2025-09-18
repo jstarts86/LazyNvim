@@ -6,6 +6,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     "AbaoFromCUG/websocket.nvim",
   },
+  ---@type neopyter.Option
   opts = {
     mode = "direct",
     remote_address = "127.0.0.1:9001",
