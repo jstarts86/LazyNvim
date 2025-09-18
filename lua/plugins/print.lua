@@ -32,7 +32,7 @@ return {
       -- ... or ...
       "echasnovski/mini.hipatterns", -- Optional: Needed for line highlighting ('fine-grained' hipatterns plugin)
 
-      "ibhagwan/fzf-lua", -- Optional: If you want to use the `:Debugprint search` command with fzf-lua
+      "nvim-telescope/telescope.nvim"
     }, -- … Other options
   },
 }

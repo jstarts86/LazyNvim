@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.move",
+    "nvim-mini/mini.move",
     opts = {
       mapping = {
         right = '<S-l>',

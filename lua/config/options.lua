@@ -2,6 +2,8 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 -- options.lua
+-- Grab full login environment from zsh
+vim.opt.shell = "/bin/zsh"
 vim.opt.guicursor = ""
 -- vim.g.lazyvim_blink_main = false
 vim.opt.autoread = true
@@ -13,11 +15,13 @@ vim.opt.smartindent = true
 vim.g.autoformat = false
 -- vim.g.minipairs_disable = true
 
+vim.g.python3_host_prog=vim.fn.expand("~/.virtualenvs/neovim/bin/python3")
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.foldmethod = "manual"
 local undodir = os.getenv("HOME") .. "/.vim/undodir"
 
+vim.env.PATH = "/opt/anaconda3/bin:" .. vim.env.PATH
 -- vim.g.maplocalleader = " "
 vim.opt.undodir = undodir
 vim.opt.undofile = true
@@ -29,7 +33,7 @@ vim.o.cursorlineopt = "number"
 -- vim.opt.conceallevel = 2
 vim.g.python3_host_prog = vim.fn.exepath("/opt/anaconda3/bin/python")
 vim.g.loaded_python3_provider = nil
--- vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.lazyvim_python_lsp = "basedpyright"
 
 vim.g.snacks_animate = false
 

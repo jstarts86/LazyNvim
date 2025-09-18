@@ -66,3 +66,14 @@ keymap.set("n", "<leader>Mm", function() -- "t" for theme, "rd" for rose-pine da
   vim.cmd.colorscheme("rose-pine-moon")
   vim.notify("Theme: Rosé Pine Moon", vim.log.levels.INFO, { title = "Colorscheme" })
 end, { noremap = true, silent = true, desc = "Theme: Rosé Pine Moon" })
+
+
+-- keymap.set("n", "<leader>ip", function()
+--   local venv = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
+--   if venv ~= nil then
+--     venv = string.match(venv, "/.+/(.+)")
+--     vim.cmd(("MoltenInit %s"):format(venv))
+--   else
+--     vim.cmd("MoltenInit python3")
+--   end
+-- end, { desc = "Initialize Molten for python3", silent = true })

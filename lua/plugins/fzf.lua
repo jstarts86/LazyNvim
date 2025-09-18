@@ -1,26 +1,59 @@
 return {
-  {
-    "ibhagwan/fzf-lua",
-    cmd = "FzfLua",
-    opts = function(_, opts)
-      local actions = require("fzf-lua.actions")
-      return {
-        files = {
-          cwd_prompt = false,
-          actions = {
-            ["ctrl-x"] = { fn = actions.toggle_ignore, reload = true },
-            ["ctrl-h"] = { fn = actions.toggle_hidden, reload = true },
-            -- ["ctrl-t"] = { fn = actions.file_edit },
-            -- ["ctrl-s"] = { fn = actions.file_sel_to_qf, reload = true },
-            -- ["ctrl-p"] = { fn = actions.file_switch, reload = true}
-            -- ["ctrl-p"] = { fn = actions.toggle_preview_focus },
-          },
-        },
-      }
-    end,
-    keys = {
-      { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
-      { "<leader>C", "<cmd>FzfLua commands<cr>", desc = "Commands" },
-    },
-  },
+  -- {
+    -- "ibhagwan/fzf-lua",
+    -- cmd = "FzfLua",
+    -- opts = function(_, opts)
+    --   local actions = require("fzf-lua.actions")
+    --   return {
+    --     files = {
+    --       cwd_prompt = false,
+    --       actions = {
+    --         ["ctrl-x"] = { fn = actions.toggle_ignore, reload = true },
+    --         ["ctrl-h"] = { fn = actions.toggle_hidden, reload = true },
+    --       },
+    --     },
+        -- lsp = {
+        --   live_workspace_symbols = {
+        --     actions = {
+        --       ["ctrl-M"] = function()
+        --         require("fzf-lua").lsp_live_workspace_symbols({
+        --           symbol_kind = { 12, 6 }, -- functions/methods
+        --         })
+        --       end,
+        --     },
+        --   },
+        -- },
+      -- }
+    -- end,
+    -- keys = {
+    --   -- { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+    --   -- { "<leader>C", "<cmd>FzfLua commands<cr>", desc = "Commands" },
+    --   -- direct mappings for filtered workspace symbols
+    --   {
+    --     "<leader>sf",
+    --     function()
+    --       require("fzf-lua").lsp_live_workspace_symbols({
+    --         symbol_kind = { 12, 6 },
+    --       })
+    --     end,
+    --     desc = "Workspace Functions/Methods",
+    --   },
+    --   {
+    --     "<leader>sC",
+    --     function()
+    --       require("fzf-lua").lsp_live_workspace_symbols({
+    --         symbol_kind = { 5 },
+    --       })
+    --     end,
+    --     desc = "Workspace Classes",
+    --   },
+    --   {
+    --     "<leader>sS",
+    --     function()
+    --       require("fzf-lua").lsp_live_workspace_symbols({})
+    --     end,
+    --     desc = "Workspace Symbols (All)",
+    --   },
+    -- },
+  -- },
 }
