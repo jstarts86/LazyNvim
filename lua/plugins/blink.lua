@@ -11,7 +11,7 @@ return {
       "mikavilpas/blink-ripgrep.nvim",
       "xzbdmw/colorful-menu.nvim",
     },
-    event = { "InsertEnter"},
+    event = { "InsertEnter" },
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -73,7 +73,7 @@ return {
         },
         documentation = {
           auto_show = true,
-          -- auto_show_delay_ms = 200,
+          auto_show_delay_ms = 200,
           treesitter_highlighting = true,
           window = {},
         },

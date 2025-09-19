@@ -46,8 +46,8 @@
 
 return {
   {
-    "mfussenegger/nvim-jdtls",
-    ft = "java",
+    -- "mfussenegger/nvim-jdtls",
+    -- ft = "java",
     -- require("lspconfig").jdtls.setup({
     --   capabilities = require("blink.cmp").get_lsp_capabilities(),
     -- }),

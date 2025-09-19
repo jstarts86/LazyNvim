@@ -1,36 +1,63 @@
 return {
   -- lazy.nvim
-  {
-    "folke/snacks.nvim",
-    -- lazy = false,
-    opts = {
-      picker = {
-        sources = {
-          explorer = {
-            enabled = true,
-            layout = {
-              preset = "sidebar",
-              preview = false,
-              layout = {
-                position = "right",
-              },
-            },
-            auto_close = true,
-          },
-        }
-      },
-      indent = {
-        enabled = false,
-      },
-      buffers = {
-        enabled = true,
-      },
-      words = {
-        enabled = true,
-      },
-      keys = {
-      { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-      }
-    },
-  },
+  -- {
+  --   "folke/snacks.nvim",
+  --   -- lazy = false,
+  --   opts = {
+  --     picker = {
+  --       sources = {
+  --         explorer = {
+  --           enabled = true,
+  --           layout = {
+  --             preset = "sidebar",
+  --             preview = false,
+  --             layout = {
+  --               position = "right",
+  --             },
+  --           },
+  --           auto_close = true,
+  --         },
+  --       },
+  --       win = {
+  --         input = {
+  --           keys = {
+  --             ["<A-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+  --             ["<A-i>"] = { "toggle_ignored", mode = { "i", "n" } },
+  --           },
+  --         },
+  --         list = {
+  --           keys = {
+  --             ["<A-h>"] = "toggle_hidden",
+  --             ["<A-i>"] = "toggle_ignored",
+  --             ["<C-l>"] = "focus_preview",
+  --           },
+  --         },
+  --         preview = {
+  --           keys = {
+  --             ["<C-l>"] = "focus_preview",
+  --           },
+  --         },
+  --       },
+  --     },
+  --
+  --     indent = {
+  --       enabled = false,
+  --     },
+  --     buffers = {
+  --       enabled = true,
+  --     },
+  --     words = {
+  --       enabled = true,
+  --     },
+  --     keys = {
+  --       {
+  --         "<leader>uC",
+  --         function()
+  --           Snacks.picker("colorschemes") -- ✅ call picker by name
+  --         end,
+  --         desc = "Colorschemes",
+  --       },
+  --     },
+  --   },
+  -- },
 }
