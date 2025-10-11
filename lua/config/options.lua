@@ -3,8 +3,8 @@
 -- Add any additional options here
 -- options.lua
 -- Grab full login environment from zsh
-vim.opt.shell = "/bin/zsh"
-vim.opt.guicursor = ""
+-- vim.opt.shell = "/bin/zsh"
+vim.opt.guicursor = "a:block"
 -- vim.g.lazyvim_blink_main = false
 vim.opt.autoread = true
 vim.opt.tabstop = 4
@@ -15,7 +15,7 @@ vim.opt.smartindent = true
 vim.g.autoformat = false
 -- vim.g.minipairs_disable = true
 
-vim.g.python3_host_prog=vim.fn.expand("~/.virtualenvs/neovim/bin/python3")
+vim.g.python3_host_prog = vim.fn.expand("~/.virtualenvs/neovim/bin/python3")
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.foldmethod = "manual"
@@ -42,17 +42,19 @@ vim.o.showtabline = 0
 -- Motivation: Less clutter in completion windows and a more direct usage of snippits
 vim.g.lazyvim_mini_snippets_in_completion = true
 -- vim.opt.autochdir = true
-vim.g.root_spec = {  "cwd" }
+vim.g.root_spec = { "cwd" }
 vim.g.augment_workspace_folders = {
-  '/Users/john/Coding/BackendProjerts/hardware',
-  '/Users/john/coding/IdeaProjects/ITCLab1',
-  '/Users/john/.config/nvim/'
+  "/Users/john/Coding/BackendProjerts/hardware",
+  "/Users/john/coding/IdeaProjects/ITCLab1",
+  "/Users/john/.config/nvim/",
 }
 vim.g.augment_suggestions_disabled = true
 vim.g.augment_diable_completions = true
 vim.g.augment_disable_tab_mapping = true
 
-
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" }) -- completions popup
 -- I find auto open annoying, keep in mind setting this option will require setting
 -- a keybind for `:noautocmd MoltenEnterOutput` to open the output again
 -- vim.g.molten_auto_open_output = false

@@ -5,23 +5,6 @@
 --   {
 --     "neovim/nvim-lspconfig",
 --     opts = {
---       servers = {
---         -- Your JDTLS configuration goes here
---         jdtls = {
---           settings = {
---             java = {
---               configuration = {
---                 runtimes = {
---                   -- {
---                   --   name = "Java21",
---                   --   path = "/usr/bin/java",
---                   -- },
---                 },
---               },
---             },
---           },
---         },
---       },
 --       setup = {
 --         jdtls = function()
 --           -- Your nvim-java configuration goes here
@@ -44,12 +27,43 @@
 -- },
 -- }
 
+-- vim.api.nvim_create_autocmd('FileType', {
+-- 	pattern = 'java',
+-- 	desc = 'Setup jdtls',
+-- 	callback = function()
+-- 		require('jdtls').start_or_attach({
+-- 			capabilities = require('blink.cmp').get_lsp_capabilities(),
+-- 			cmd = { 'jdtls' },
+-- 			root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+-- 		})
+-- 	end,
+-- })
+
 return {
   {
-    -- "mfussenegger/nvim-jdtls",
-    -- ft = "java",
-    -- require("lspconfig").jdtls.setup({
-    --   capabilities = require("blink.cmp").get_lsp_capabilities(),
-    -- }),
+    "mfussenegger/nvim-jdtls",
+    ft = { "java" },
+    opts = function(_, opts)
+      opts.jdtls = opts.jdtls or {}
+      opts.jdtls.capabilities = require("blink.cmp").get_lsp_capabilities()
+    end,
   },
+
+  -- {
+  --   "elmcgill/springboot-nvim",
+  --   dependencies = {
+  --       "neovim/nvim-lspconfig",
+  --       "mfussenegger/nvim-jdtls"
+  --   },
+  --   config = function()
+  --       local springboot_nvim = require("springboot-nvim")
+  --       vim.keymap.set('n', '<leader>Br', springboot_nvim.boot_run, {desc = "Spring Boot Run Project"})
+  --       vim.keymap.set('n', '<leader>Bc', springboot_nvim.generate_class, {desc = "Java Create Class"})
+  --       vim.keymap.set('n', '<leader>Bi', springboot_nvim.generate_interface, {desc = "Java Create Interface"})
+  --       vim.keymap.set('n', '<leader>Be', springboot_nvim.generate_enum, {desc = "Java Create Enum"})
+  --       springboot_nvim.setup({})
+  --   end
+  -- }
 }
+
+-- return {'nvim-java/nvim-java'}

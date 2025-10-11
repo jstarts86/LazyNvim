@@ -15,7 +15,6 @@ return {
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
-    ---
     opts = {
       snippets = {
         -- Use LazyVim’s snippet expander (LuaSnip under the hood)
@@ -23,7 +22,6 @@ return {
           return LazyVim.cmp.expand(snippet)
         end,
       },
-
       appearance = {
         use_nvim_cmp_as_default = false,
         nerd_font_variant = "mono",
@@ -71,14 +69,16 @@ return {
             },
           },
         },
+
         documentation = {
-          auto_show = true,
+          auto_show = false,
           auto_show_delay_ms = 200,
           treesitter_highlighting = true,
-          window = {},
+          window = {
+          },
         },
         ghost_text = {
-          enabled = vim.g.ai_cmp,
+          enabled = true,
         },
         -- Mirror: <CR> confirm with select = false (no preselect accept)
         list = {
@@ -93,8 +93,6 @@ return {
       -- signature = { enabled = true },
 
       sources = {
-        -- enable nvim-cmp sources via blink.compat
-        -- compat = { "emoji" },
         default = { "lsp", "snippets", "path", "buffer", "dadbod", "emoji" },
         providers = {
           lsp = {
@@ -169,53 +167,8 @@ return {
         ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
 
         -- Optional: quick accept like <C-y> in your base
-        ["<C-y>"] = { "select_and_accept" },
+        ["<C-y>"] = { "hide_signature", "hide_documentation", "hide" },
       },
     },
-
-    ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
-    config = function(_, opts)
-      -- setup compat sources (same as LazyVim’s default)
-      local enabled = opts.sources.default
-      for _, source in ipairs(opts.sources.compat or {}) do
-        opts.sources.providers[source] = vim.tbl_deep_extend(
-          "force",
-          { name = source, module = "blink.compat.source" },
-          opts.sources.providers[source] or {}
-        )
-        if type(enabled) == "table" and not vim.tbl_contains(enabled, source) then
-          table.insert(enabled, source)
-        end
-      end
-
-      -- Super-tab behavior + AI accept on <Tab>
-      if not opts.keymap["<Tab>"] then
-        if opts.keymap.preset == "super-tab" then
-          opts.keymap["<Tab>"] = {
-            require("blink.cmp.keymap.presets").get("super-tab")["<Tab>"][1],
-            LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
-            "fallback",
-          }
-        else
-          opts.keymap["<Tab>"] = {
-            LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
-            "fallback",
-          }
-        end
-      end
-
-      -- Add Shift-Tab to jump to previous snippet placeholder (like your LuaSnip mapping)
-      if not opts.keymap["<S-Tab>"] then
-        opts.keymap["<S-Tab>"] = {
-          LazyVim.cmp.map({ "snippet_backward" }),
-          "fallback",
-        }
-      end
-
-      vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-
-      require("blink.cmp").setup(opts)
-    end,
   },
 }

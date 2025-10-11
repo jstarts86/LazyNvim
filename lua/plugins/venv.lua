@@ -24,8 +24,16 @@ return {
           command = "fd '/python$' /opt/anaconda3/bin --full-path -a -L",
           type = "anaconda",
         },
-        local_venv = {
-          command = "fd '/bin/python$' .venv --full-path -a -L",
+        local_1 = {
+          command = "fd '/bin/python$' .venv --full-path -IH -a",
+          type = "local",
+        },
+        local_2 = {
+          command = "fd '/bin/python$' venv --full-path -IH -a",
+          type = "local",
+        },
+        local_3 = {
+          command = "fd '/bin/python$' .env --full-path -a -IH",
           type = "local",
         },
       },

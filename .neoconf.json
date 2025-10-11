@@ -11,5 +11,52 @@
         "enabled": true
       }
     }
+  },
+  "lspconfig": {
+    "jdtls": {
+      "java.configuration.runtimes": [
+        {
+          "name": "JavaSE-24",
+          "path": "/Users/john/Library/Java/JavaVirtualMachines/corretto-24/Contents/Home"
+        },
+        {
+          "name": "JavaSE-23",
+          "path": "/Users/john/Library/Java/JavaVirtualMachines/corretto-23.0.2/Contents/Home"
+        },
+        {
+          "name": "JavaSE-22",
+          "path": "/Users/john/Library/Java/JavaVirtualMachines/corretto-22.0.2/Contents/Home"
+        },
+        {
+          "name": "JavaSE-21",
+          "path": "/Users/john/Library/Java/JavaVirtualMachines/openjdk-21.0.2/Contents/Home",
+          "default": true
+        },
+        {
+          "name": "JavaSE-20",
+          "path": "/Library/Java/JavaVirtualMachines/jdk-20.jdk/Contents/Home"
+        },
+        {
+          "name": "JavaSE-19",
+          "path": "/Users/john/Library/Java/JavaVirtualMachines/temurin-19.0.2/Contents/Home"
+        },
+        {
+          "name": "JavaSE-18",
+          "path": "/Users/john/Library/Java/JavaVirtualMachines/corretto-18.0.2/Contents/Home"
+        },
+        {
+          "name": "JavaSE-17",
+          "path": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home"
+        },
+        {
+          "name": "JavaSE-11",
+          "path": "/Users/john/Library/Java/JavaVirtualMachines/corretto-11.0.21/Contents/Home"
+        },
+        {
+          "name": "JavaSE-11",
+          "path": "/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
+        }
+      ]
+    }
   }
 }
