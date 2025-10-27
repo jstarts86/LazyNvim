@@ -4,28 +4,17 @@ return {
     name = "rose-pine",
     lazy = false,
     opts = {
-      disable_backround = true,
-      background = "light",
+      disable_background = true,
       variant = "moon",
       styles = {
         transparency = true,
       },
-      pallete = {
-        main = {
-          base = "##0e6bde",
-          highlight_low = "#063970",
-        },
-        moon = {
-          base = "##0e6bde",
-          highlight_low = "#063970",
-        },
-      },
       highlight_groups = {
-        Visual = {
-          -- lighter version of #063970
-          bg = "#0e6bde",
-          fg = "#191724", -- keep text readable
-        },
+        -- Transparent background
+        Normal = { bg = "none" },
+        NormalFloat = { bg = "none" },
+        -- Lighter visual highlight
+        Visual = { bg = "#6fa7e6" },
       },
     },
   },
