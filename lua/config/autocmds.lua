@@ -36,27 +36,27 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- end
 
 
-local highlight_group = vim.api.nvim_create_augroup("CustomHighlightOverrides", { clear = true })
-
-local function set_custom_highlights()
-  -- Transparent backgrounds
-  vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-
-  -- Custom visual selection color
-  local visual_bg = "#063970"
-  vim.api.nvim_set_hl(0, "Visual", { bg = visual_bg })
-end
-
--- Apply highlights right after color scheme changes
-vim.api.nvim_create_autocmd("ColorScheme", {
-  group = highlight_group,
-  callback = set_custom_highlights,
-})
-
--- Ensure highlights are enforced after LazyVim fully starts
-vim.api.nvim_create_autocmd("User", {
-  group = highlight_group,
-  pattern = "LazyVimStarted",
-  callback = set_custom_highlights,
-})
+-- local highlight_group = vim.api.nvim_create_augroup("CustomHighlightOverrides", { clear = true })
+--
+-- local function set_custom_highlights()
+--   -- Transparent backgrounds
+--   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+--   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+--
+--   -- Custom visual selection color
+--   local visual_bg = "#063970"
+--   vim.api.nvim_set_hl(0, "Visual", { bg = visual_bg })
+-- end
+--
+-- -- Apply highlights right after color scheme changes
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+--   group = highlight_group,
+--   callback = set_custom_highlights,
+-- })
+--
+-- -- Ensure highlights are enforced after LazyVim fully starts
+-- vim.api.nvim_create_autocmd("User", {
+--   group = highlight_group,
+--   pattern = "LazyVimStarted",
+--   callback = set_custom_highlights,
+-- })
