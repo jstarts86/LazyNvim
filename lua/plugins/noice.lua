@@ -3,48 +3,89 @@ return {
   event = "VeryLazy",
   config = function()
     require("noice").setup({
+      cmdline = {
+        enabled = true,
+        view = "cmdline",
+      },
       routes = {
         {
-          filter = {
-            event = "notify",
-            find = "pyright",
-          },
+          filter = { event = "notify", find = "pyright" },
           opts = { skip = true },
         },
       },
       presets = {
-        bottom_search = true, -- use a classic bottom cmdline for search
-        -- command_palette = true, -- position the cmdline and popupmenu together
-        long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true, -- add a border to hover docs and signature help
+        bottom_search = false,
+        command_palette = false,
+        long_message_to_split = true,
+        inc_rename = false,
+        lsp_doc_border = true,
       },
       lsp = {
         hover = {
           enabled = true,
           silent = true,
+          opts = { border = "rounded" },
+        },
+        documentation = {
+          ---@type NoiceViewOptions
+          -- 'view' determines how the doc is displayed.
+          -- Options: "hover" (floating), "split" (new pane), "notify" (toast popups), "popup"
+          view = "hover",
           opts = {
-            border = "rounded",
-            size = { max_width = 80, max_height = 20 }, -- limit hover size
+            -- 'render' defines the parser used for the content.
+            -- Options: "markdown", "plain"
+            render = "markdown",
+
+            -- 'format' is a list of strings/templates to build the output.
+            -- Options: { "{message}" }, { "{title}", "{message}" }, etc.
+            format = { "{message}" },
+
+            -- 'win_options' are standard Neovim window local options (:h winbar)
+            win_options = {
+              conceallevel = 3, -- Hides markdown syntax (like link URLs)
+              concealcursor = "n", -- Keeps text concealed in Normal mode
+              wrap = true, -- Wraps long lines
+            },
           },
+          -- 'replace' is a powerful callback to mutate the message before it renders.
+          -- We use this to strip JDTLS junk and fix the resulting spacing.
+
+          replace = function(renderable)
+            -- 1. Remove JDTLS links with explicit character class
+            -- Match [text](jdt://<everything except closing paren>)
+            renderable.message = renderable.message:gsub("%[([^%]]+)%]%(jdt://[^%)]+%)", "%1")
+
+            -- 2. Clean up vertical white space
+            renderable.message = renderable.message:gsub("\n\n\n+", "\n\n")
+
+            -- 3. Fix horizontal spacing
+            renderable.message = renderable.message:gsub("  +", " ")
+
+            -- 4. Fix indentation gaps in bullet points
+            renderable.message = renderable.message:gsub("\n%s+[*%-]%s+", "\n * ")
+
+            return renderable
+          end,
         },
-        signature = {
-          enabled = true,
-        },
-        markdown = {
-          hover = false, -- disable markdown conversion to avoid large empty spaces
-          signature = false,
-        },
+        -- markdown = {
+        --   hover = true,
+        --   signature = true,
+        -- },
       },
       views = {
         hover = {
           border = { style = "rounded" },
-          size = { max_width = 80, max_height = 20 },
+          size = { max_width = 100, max_height = 40 },
           win_options = {
-            wrap = true,
-            linebreak = true,
-            conceallevel = 0, -- prevents blank areas due to conceal
+            wrap = false,
+            linebreak = false,
+            conceallevel = 3,
+            winhighlight = "Normal:NoiceDocNormal,FloatBorder:NoiceDocBorder",
           },
+        },
+        cmdline = {
+          position = { row = "100%", col = 2 },
+          size = { width = "100%", height = "auto" },
         },
       },
     })

@@ -46,6 +46,18 @@ return {
     opts = function(_, opts)
       opts.jdtls = opts.jdtls or {}
       opts.jdtls.capabilities = require("blink.cmp").get_lsp_capabilities()
+      -- opts.jdtls.dap = {
+      --   hotcodereplace = "auto",
+      --   configurations = {
+      --     {
+      --       type = "java",
+      --       request = "attach",
+      --       name = "Attach to Spring Boot (Gradle BootRun)",
+      --       hostName = "127.0.0.1",
+      --       port = 5005,
+      --     },
+      --   },
+      -- }
     end,
   },
 

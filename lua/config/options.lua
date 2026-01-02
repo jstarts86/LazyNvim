@@ -6,6 +6,8 @@
 -- vim.opt.shell = "/bin/zsh"
 vim.opt.guicursor = "a:block"
 -- vim.g.lazyvim_blink_main = false
+-- Prevent the system from trying to open jdt:// URIs
+vim.g.netrw_nogx = 1 -- Disable netrw gx if using it
 vim.opt.autoread = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -14,7 +16,7 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.g.autoformat = false
 -- vim.g.minipairs_disable = true
-vim.o.background = 'light'
+vim.o.background = "light"
 vim.g.python3_host_prog = vim.fn.expand("~/.virtualenvs/neovim/bin/python3")
 vim.opt.swapfile = false
 vim.opt.backup = false

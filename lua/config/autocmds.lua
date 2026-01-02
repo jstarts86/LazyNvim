@@ -15,18 +15,41 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "markdown" },
   callback = function()
-    vim.wo.conceallevel = 0
+    vim.wo.conceallevel = 2
   end,
 })
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "html", "css", "js", "ts", "lua", "dart", "tsx", "jsx"},
+  pattern = { "html", "css", "js", "ts", "lua", "dart", "tsx", "jsx" },
   callback = function()
     vim.opt.tabstop = 2
     vim.opt.softtabstop = 2
     vim.opt.shiftwidth = 2
   end,
 })
--- function ColorMyPencils(color) 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "java",
+  callback = function()
+    local clients = vim.lsp.get_active_clients()
+    for _, client in ipairs(clients) do
+      if client.name == "metals" then
+        client.stop()
+        vim.notify("Stopped Metals for Java file", vim.log.levels.INFO)
+      end
+    end
+  end,
+})
+-- Fix for JDTLS internal URIs
+vim.api.nvim_create_autocmd("BufReadCmd", {
+  pattern = "jdt://*",
+  callback = function()
+    local buffer = vim.api.nvim_get_current_buf()
+    vim.api.nvim_buf_set_option(buffer, "buftype", "nofile")
+    vim.api.nvim_buf_set_option(buffer, "modifiable", false)
+    -- The LSP client usually handles the content population automatically
+    -- if nvim-jdtls is configured correctly.
+  end,
+})
+-- function ColorMyPencils(color)
 -- 	color = color or "rose-pine"
 -- 	vim.cmd.colorscheme(color)
 --
@@ -34,7 +57,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 --
 -- end
-
 
 -- local highlight_group = vim.api.nvim_create_augroup("CustomHighlightOverrides", { clear = true })
 --

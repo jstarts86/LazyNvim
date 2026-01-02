@@ -10,7 +10,7 @@ return {
             enabled = true,
             layout = {
               preset = "sidebar",
-              preview = false,
+              preview = true,
               layout = {
                 position = "right",
               },
