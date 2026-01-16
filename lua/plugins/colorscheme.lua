@@ -25,6 +25,19 @@ return {
       vim.cmd("colorscheme rose-pine")
     end,
   },
+  {
+    "vague-theme/vague.nvim",
+    lazy = true, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other plugins
+    config = function()
+      -- NOTE: you do not need to call setup if you don't want to.
+      require("vague").setup({
+        transparent= true,
+        -- optional configuration here
+      })
+      vim.cmd("colorscheme vague")
+    end
+  },
 
   {
     "craftzdog/solarized-osaka.nvim",
@@ -39,20 +52,13 @@ return {
         floats = "transparent",
       },
       on_highlights = function(hl, c)
-        -- editor
-        -- hl.Normal = { bg = c.bg }
-        -- hl.NormalNC = { bg = c.bg }
-        -- hl.CursorLine = { bg = c.bg_highlight }
-        -- hl.Visual = { bg = c.selection }
-        --
-        -- -- UI
-        -- hl.LineNr = { bg = c.bg }
-        -- hl.SignColumn = { bg = c.bg }
-        -- hl.StatusLine = { bg = c.bg_statusline }
+        -- Classic Solarized dark background
+        hl.Normal = { bg = "#002b36" }
+        hl.NormalNC = { bg = "#002b36" }
+        hl.CursorLine = { bg = "#001a21" }
+        -- hl.LineNr = { bg = "#001a21" }
+        -- hl.SignColumn = { bg = "#001a21" }
 
-        -- hl.Visual = { bg = "#b58900", fg = c.bg }
-
-        -- optional: make visual mode really pop
         hl.VisualNOS = { bg = "#b58900", fg = c.bg }
       end,
     },
