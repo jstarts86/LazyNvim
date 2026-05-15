@@ -2,7 +2,7 @@ return {
   -- lazy.nvim
   {
     "folke/snacks.nvim",
-    -- lazy = false,
+    lazy = false,
     opts = {
       picker = {
         sources = {

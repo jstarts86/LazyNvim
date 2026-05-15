@@ -14,6 +14,14 @@ return {
           filter = { event = "notify", find = "pyright" },
           opts = { skip = true },
         },
+        {
+          filter = { event = "lsp", kind = "progress", find = "publishDiagnostics" },
+          opts = { skip = true },
+        },
+        {
+          filter = { event = "lsp", kind = "progress", find = "Validate documents" },
+          opts = { skip = true },
+        },
       },
 
       presets = {
@@ -35,16 +43,16 @@ return {
         documentation = {
           view = "hover",
           opts = {
-            render = "plain",
+            render = "markdown",
             format = { "{message}" },
             win_options = {
               conceallevel = 3,
-              concealcursor = "n",
+              concealcursor = "nvic",
             },
           },
         },
         markdown = {
-          hover = false,
+          hover = true,
           signature = false,
         },
       },
@@ -53,6 +61,9 @@ return {
         hover = {
           border = { style = "rounded" },
           size = { max_width = 80, max_height = 20 },
+          buf_options = {
+            filetype = "markdown",
+          },
           win_options = {
             wrap = true,
             linebreak = true,

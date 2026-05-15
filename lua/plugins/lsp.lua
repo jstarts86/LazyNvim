@@ -5,7 +5,6 @@ return {
     opts = {
       -- make sure mason installs the server
       servers = {
-        jdtls = {},
         matlab_ls = {
           -- MATLAB Language Server settings
           filetypes = { "matlab" },
@@ -23,10 +22,10 @@ return {
         },
       },
       setup = {
+        -- jdtls is handled by nvim-jdtls in lua/plugins/java.lua
         jdtls = function()
-          return true -- avoid duplicate servers
+          return true
         end,
-        -- No special setup needed for matlab_ls, LazyVim will handle it
       },
     },
   },

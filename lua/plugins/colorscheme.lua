@@ -18,8 +18,8 @@ return {
           transparency = true,
         },
         highlight_groups = {
-          CursorLine = { bg = "surface", inherit = false },
-          Visual = { bg = "muted", fg = "gold", inherit = false },
+          -- CursorLine = { bg = "surface", inherit = false },
+          -- Visual = { bg = "muted", fg = "gold", inherit = false },
         },
       })
       vim.cmd("colorscheme rose-pine")
@@ -45,17 +45,18 @@ return {
     priority = 1000,
     opts = {
       dim_inactive = false, -- dims inactive windows
-      style = "dark",
+      style = "moon",
       transparent = true,
+      terminal_colors = true,
       styles = {
         sidebars = "transparent",
         floats = "transparent",
       },
       on_highlights = function(hl, c)
         -- Classic Solarized dark background
-        hl.Normal = { bg = "#002b36" }
-        hl.NormalNC = { bg = "#002b36" }
-        hl.CursorLine = { bg = "#001a21" }
+        -- hl.Normal = { bg = "#002b36" }
+        -- hl.NormalNC = { bg = "#002b36" }
+        -- hl.CursorLine = { bg = "#001a21" }
         -- hl.LineNr = { bg = "#001a21" }
         -- hl.SignColumn = { bg = "#001a21" }
 
@@ -81,11 +82,11 @@ return {
         update_interval = 1000, -- ms
         set_dark_mode = function()
           vim.o.background = "dark"
-          vim.cmd("colorscheme solarized-osaka")
+          vim.cmd("colorscheme rose-pine-moon")
         end,
         set_light_mode = function()
-          vim.o.background = "light"
-          vim.cmd("colorscheme modus_operandi")
+          vim.o.background = "dark"
+          vim.cmd("colorscheme rose-pine-moon")
         end,
       })
       require("auto-dark-mode").init()
