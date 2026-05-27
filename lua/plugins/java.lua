@@ -32,6 +32,18 @@ return {
 
           settings = {
             java = {
+              maven = {
+                downloadSources = true,
+              },
+              eclipse = {
+                downloadSources = true,
+              },
+              gradle = {
+                enabled = true,
+              },
+              references = {
+                includeDecompiledSources = true,
+              },
               completion = {
                 favoriteStaticMembers = {
                   "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*",
@@ -61,6 +73,62 @@ return {
               vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = "Java: " .. desc })
             end
 
+            -- Hover with navigable float: focus with <C-w>w, then gd on any symbol
+            map("n", "K", function()
+              local src_bufnr = vim.api.nvim_get_current_buf()
+              local src_win = vim.api.nvim_get_current_win()
+              local src_cursor = vim.api.nvim_win_get_cursor(src_win)
+              local params = vim.lsp.util.make_position_params()
+
+              vim.lsp.buf_request(src_bufnr, "textDocument/hover", params, function(err, result)
+                if err or not result or not result.contents then return end
+                local lines = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
+                lines = vim.lsp.util.trim_empty_lines(lines)
+                if vim.tbl_isempty(lines) then return end
+
+                for i, line in ipairs(lines) do
+                  if line:find("jdt://", 1, true) then
+                    line = (line:gsub("%[([^%]]+)%]%(jdt://[^%)]*%)", "%1"))
+                  end
+                  if line:sub(1, 1) == "|" then
+                    local cells = vim.split(line, "|", { plain = true })
+                    for j, cell in ipairs(cells) do
+                      local trimmed = vim.trim(cell)
+                      cells[j] = (trimmed == "" or trimmed:match("^[%-:]+$"))
+                        and cell
+                        or (" " .. trimmed .. " ")
+                    end
+                    line = table.concat(cells, "|")
+                  end
+                  lines[i] = line
+                end
+
+                local float_bufnr, float_win = vim.lsp.util.open_floating_preview(
+                  lines, "markdown", { focusable = true, focus = false, border = "rounded" }
+                )
+
+                -- gd on any word in the float does a workspace symbol lookup
+                vim.keymap.set("n", "gd", function()
+                  local word = vim.fn.expand("<cword>")
+                  if vim.api.nvim_win_is_valid(float_win) then
+                    vim.api.nvim_win_close(float_win, true)
+                  end
+                  vim.api.nvim_set_current_win(src_win)
+                  vim.api.nvim_win_set_cursor(src_win, src_cursor)
+                  local ok = pcall(require("telescope.builtin").lsp_workspace_symbols, { query = word })
+                  if not ok then
+                    vim.lsp.buf.workspace_symbol(word)
+                  end
+                end, { buffer = float_bufnr, nowait = true, desc = "Java: Go to definition" })
+
+                vim.keymap.set("n", "q", function()
+                  if vim.api.nvim_win_is_valid(float_win) then
+                    vim.api.nvim_win_close(float_win, true)
+                  end
+                end, { buffer = float_bufnr, nowait = true })
+              end)
+            end, "Hover docs")
+
             -- jdtls extras: not available via plain vim.lsp.buf
             map("n", "<leader>co", jdtls.organize_imports, "Organize Imports")
             map("n", "<leader>cv", jdtls.extract_variable, "Extract Variable")
@@ -81,5 +149,16 @@ return {
         end,
       })
     end,
+  },
+  {
+    "cskeeters/javadoc.nvim",
+    enabled = false,
+    ft = "java",
+    init = function()
+      vim.g.javadoc_path = vim.fn.expand("~/Coding/java-docs/api")
+    end,
+    keys = {
+      { "<leader>cj", "<Plug>JavadocOpen", ft = "java", desc = "Java: Open Javadoc for word under cursor" },
+    },
   },
 }

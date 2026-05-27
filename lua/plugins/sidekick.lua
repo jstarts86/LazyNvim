@@ -1,45 +1,26 @@
 return {
-  -- Place Aerial on the left
   {
-    "stevearc/aerial.nvim",
+    "folke/sidekick.nvim",
     opts = {
-      layout = {
-        default_direction = "left",
-        placement = "edge",
+      nes = {
+        enabled = false, -- disable Copilot LSP / Next Edit Suggestions
       },
-    },
-  },
-
-  -- Place Outline on the left
-  {
-    "hedyhli/outline.nvim",
-    opts = {
-      window = {
-        position = "left",
-        width = 25,
-      },
-    },
-  },
-
-  -- Place dadbod-ui on the left
-  {
-    "kristijanhusak/vim-dadbod-ui",
-    init = function()
-      vim.g.db_ui_win_position = "left"
-      vim.g.db_ui_use_nerd_fonts = 1
-    end,
-  },
-
-  -- Open claudecode in a tmux pane to the right
-  {
-    "coder/claudecode.nvim",
-    opts = {
-      terminal = {
-        provider = "external",
-        provider_opts = {
-          external_terminal_cmd = "tmux split-window -h %s",
+      copilot = {
+        status = {
+          level = vim.log.levels.OFF, -- suppress "not signed in" notification
         },
       },
+      cli = {
+        mux = {
+          backend = "tmux",
+          enabled = "true",
+          create = "split",
+          split = {
+            vertical = true, -- vertical or horizontal split
+            size = 0.5, -- size of the split (0-1 for percentage)
+          },
+        },
+      }, -- test comment
     },
   },
 }

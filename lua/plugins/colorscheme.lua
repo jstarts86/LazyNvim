@@ -45,7 +45,7 @@ return {
     priority = 1000,
     opts = {
       dim_inactive = false, -- dims inactive windows
-      style = "moon",
+      style = "storm",
       transparent = true,
       terminal_colors = true,
       styles = {
@@ -82,11 +82,11 @@ return {
         update_interval = 1000, -- ms
         set_dark_mode = function()
           vim.o.background = "dark"
-          vim.cmd("colorscheme rose-pine-moon")
+          vim.cmd("colorscheme solarized-osaka")
         end,
         set_light_mode = function()
-          vim.o.background = "dark"
-          vim.cmd("colorscheme rose-pine-moon")
+          vim.o.background = "light"
+          vim.cmd("colorscheme modus_operandi")
         end,
       })
       require("auto-dark-mode").init()

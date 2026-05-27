@@ -6,6 +6,9 @@ return {
     opts = {
       -- Allow rendering in nofile buffers (Noice hover windows use buftype=nofile)
       buftypes = {},
+      pipe_table = {
+        enabled = false
+      },
       file_types = { "markdown" },
       code = {
         sign = false,
@@ -25,4 +28,9 @@ return {
   --     require("java-docs").setup({})
   --   end,
   -- },
+  {
+    "ice345/markdown-table-wrap.nvim",
+    ft = "markdown",
+    opts = {},
+  },
 }
