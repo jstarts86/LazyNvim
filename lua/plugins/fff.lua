@@ -21,54 +21,17 @@ end
 
 local function find_files(dir)
   return function()
-    require("snacks-fff").find_files({ cwd = dir() })
+    require("fff").find_files({ cwd = dir() })
   end
 end
 
 local function live_grep(dir, opts)
   return function()
-    require("snacks-fff").live_grep(vim.tbl_deep_extend("force", { cwd = dir() }, opts or {}))
-  end
-end
-
-local function setup_input_focus_keymaps()
-  local ui = require("fff.picker_ui")
-  local setup_keymaps = ui.setup_keymaps
-
-  ui.setup_keymaps = function(...)
-    setup_keymaps(...)
-
-    local state = ui.state
-    if not state or not state.input_buf then
-      return
-    end
-
-    local opts = { buffer = state.input_buf, noremap = true, silent = true }
-    vim.keymap.set({ "i", "n" }, "<C-l>", ui.focus_preview_win, opts)
-    vim.keymap.set({ "i", "n" }, "<C-w>", ui.focus_list_win, opts)
+    require("fff").live_grep(vim.tbl_deep_extend("force", { cwd = dir() }, opts or {}))
   end
 end
 
 return {
-  {
-    "so1ve/snacks-fff.nvim",
-    dependencies = {
-      "folke/snacks.nvim",
-      "dmtrKovalenko/fff.nvim",
-    },
-    opts = {
-      live_grep = {
-        grep_modes = { "plain", "regex", "fuzzy" },
-        snacks_fff = {
-          show_grep_mode_hint = true,
-          match_hl = "SnacksPickerSearch",
-        },
-      },
-    },
-    config = function(_, opts)
-      require("snacks-fff").setup(opts)
-    end,
-  },
   {
     "dmtrKovalenko/fff.nvim",
     build = function()
@@ -85,6 +48,9 @@ return {
       },
       preview = {
         enabled = true,
+        line_numbers = true,
+        cursorlineopt = 'both',
+        wrap_lines = false,
       },
       keymaps = {
         focus_preview = "<C-l>",
@@ -93,20 +59,56 @@ return {
     },
     config = function(_, opts)
       require("fff").setup(opts)
-      setup_input_focus_keymaps()
+
+      local fff = require("fff.picker_ui.picker_ui")
+
+      local function map(buf, modes, lhs, rhs)
+        vim.keymap.set(modes, lhs, rhs, { buffer = buf, noremap = true, silent = true })
+      end
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "fff_input",
+        callback = function(ev)
+          vim.schedule(function()
+            if not vim.api.nvim_buf_is_valid(ev.buf) then return end
+            map(ev.buf, "i", "<C-l>", fff.focus_preview_win)
+            map(ev.buf, "i", "<C-w>", fff.focus_list_win)
+          end)
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "fff_list",
+        callback = function(ev)
+          vim.schedule(function()
+            if not vim.api.nvim_buf_is_valid(ev.buf) then return end
+            map(ev.buf, { "i", "n" }, "<C-h>", fff.focus_input_win)
+          end)
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "fff_preview",
+        callback = function(ev)
+          vim.schedule(function()
+            if not vim.api.nvim_buf_is_valid(ev.buf) then return end
+            map(ev.buf, "n", "<C-h>", fff.focus_input_win)
+          end)
+        end,
+      })
     end,
     keys = {
       { "ff", find_files(root_dir), desc = "FFFind files" },
       { "fg", live_grep(root_dir), desc = "LiFFFe grep" },
       {
         "fz",
-        live_grep(root_dir, { grep_modes = { "fuzzy", "plain" } }),
+        live_grep(root_dir, { grep = { modes = { "fuzzy", "plain" } } }),
         desc = "Live fffuzy grep",
       },
       {
         "fc",
         function()
-          require("snacks-fff").live_grep({ cwd = root_dir(), query = vim.fn.expand("<cword>") })
+          require("fff").live_grep({ cwd = root_dir(), query = vim.fn.expand("<cword>") })
         end,
         desc = "Search current word",
       },
@@ -119,7 +121,7 @@ return {
       {
         "<leader>sw",
         function()
-          require("snacks-fff").live_grep({ cwd = root_dir(), query = visual_or_cword() })
+          require("fff").live_grep({ cwd = root_dir(), query = visual_or_cword() })
         end,
         desc = "Visual selection or word (Root Dir)",
         mode = { "n", "x" },
@@ -127,7 +129,7 @@ return {
       {
         "<leader>sW",
         function()
-          require("snacks-fff").live_grep({ cwd = cwd(), query = visual_or_cword() })
+          require("fff").live_grep({ cwd = cwd(), query = visual_or_cword() })
         end,
         desc = "Visual selection or word (cwd)",
         mode = { "n", "x" },

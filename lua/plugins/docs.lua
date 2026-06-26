@@ -1,26 +1,26 @@
 return {
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-    event = "VeryLazy",
-    opts = {
-      -- Allow rendering in nofile buffers (Noice hover windows use buftype=nofile)
-      buftypes = {},
-      pipe_table = {
-        enabled = false
-      },
-      file_types = { "markdown" },
-      code = {
-        sign = false,
-        -- Block-width code cells so Java signatures don't wrap awkwardly
-        width = "block",
-        right_pad = 1,
-      },
-      heading = {
-        sign = false,
-      },
-    },
-  },
+  -- {
+    -- "MeanderingProgrammer/render-markdown.nvim",
+    -- dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    -- event = "VeryLazy",
+    -- opts = {
+      -- -- Allow rendering in nofile buffers (Noice hover windows use buftype=nofile)
+      -- buftypes = {},
+      -- pipe_table = {
+      --   enabled = false
+      -- },
+      -- file_types = { "markdown" },
+      -- code = {
+      --   sign = false,
+      --   -- Block-width code cells so Java signatures don't wrap awkwardly
+      --   width = "block",
+      --   right_pad = 1,
+      -- },
+      -- heading = {
+      --   sign = false,
+      -- },
+  --   },
+  -- },
 
   -- {
   --   "jstarts86/java-docs.nvim",
@@ -28,9 +28,9 @@ return {
   --     require("java-docs").setup({})
   --   end,
   -- },
-  {
-    "ice345/markdown-table-wrap.nvim",
-    ft = "markdown",
-    opts = {},
-  },
+  -- {
+    -- "ice345/markdown-table-wrap.nvim",
+    -- ft = "markdown",
+    -- opts = {},
+  -- },
 }

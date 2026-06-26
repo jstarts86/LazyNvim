@@ -74,6 +74,21 @@ return {
     end,
   },
 
+  {
+    "folke/tokyonight.nvim",
+    lazy = true,
+    priority = 1000,
+    opts = {
+      style = "storm",
+      transparent = true,
+      terminal_colors = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+  },
+
   -- AUTO DARK MODE SWITCHER
   {
     "f-person/auto-dark-mode.nvim",
@@ -82,11 +97,11 @@ return {
         update_interval = 1000, -- ms
         set_dark_mode = function()
           vim.o.background = "dark"
-          vim.cmd("colorscheme solarized-osaka")
+          vim.cmd("colorscheme tokyonight-storm")
         end,
         set_light_mode = function()
           vim.o.background = "light"
-          vim.cmd("colorscheme modus_operandi")
+          vim.cmd("colorscheme tokyonight-day")
         end,
       })
       require("auto-dark-mode").init()

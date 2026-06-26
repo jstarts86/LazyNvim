@@ -166,6 +166,7 @@ return {
         -- default in all keymap presets
         ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
 
+        ["<C-j>"] = {  "hide_signature" },
         -- Optional: quick accept like <C-y> in your base
         ["<C-y>"] = { "hide_signature", "hide_documentation", "hide" },
       },

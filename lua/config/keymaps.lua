@@ -7,10 +7,10 @@ local map = vim.keymap.set
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
--- keymap.set('i', '<Esc>', function()
---   vim.lsp.buf.signature_help({ cancel = true })
---   return "<Esc>"
--- end, { expr = true, silent = true })
+-- Show LSP signature help on demand (auto-popup disabled in options.lua)
+keymap.set({ "n", "i" }, "<C-\\>", function()
+  vim.lsp.buf.signature_help()
+end, { silent = true, desc = "Show signature help" })
 
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
