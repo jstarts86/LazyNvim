@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(python3 -m json.tool)",
-      "Read(//Users/john/Coding/BackendProjects/pet-thriftier-api/**)"
+      "Read(//Users/john/Coding/BackendProjects/pet-thriftier-api/**)",
+      "Read(//Users/john/.local/share/nvim/lazy/**)",
+      "Read(//Users/john/.local/share/nvim/mason/packages/**)",
+      "Bash(git show *)",
+      "Read(//tmp/**)"
     ]
   }
 }

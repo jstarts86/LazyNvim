@@ -1,9 +1,9 @@
 return {
   {
-    -- Disabled in favour of idelice/nvim-jls (see block below). Config kept
-    -- intact so flipping `enabled` back to true restores jdtls instantly.
+    -- Active again: jls (idelice/nvim-jls, block below) had too many errors,
+    -- so we flipped back. The jls config is kept intact behind enabled=false.
     "mfussenegger/nvim-jdtls",
-    enabled = false,
+    enabled = true,
     ft = { "java" },
     -- Full ownership: bypass LazyVim's opts hook and set up directly
     config = function()
@@ -178,9 +178,11 @@ return {
       return opts
     end,
   },
-  -- JLS (idelice/jls) — replacement for jdtls. The server binary is installed
-  -- via mason (`:MasonInstall jls`); nvim-jls auto-detects the mason package
-  -- path. Do NOT call lspconfig.jls.setup() — the plugin does that internally.
+  -- JLS (idelice/jls) — disabled: too many errors in practice, switched back
+  -- to jdtls (block above). Config kept intact so flipping `enabled` back to
+  -- true restores jls instantly. The server binary is installed via mason
+  -- (`:MasonInstall jls`); nvim-jls auto-detects the mason package path.
+  -- Do NOT call lspconfig.jls.setup() — the plugin does that internally.
   -- It starts automatically on FileType=java via its own ftplugin.
   {
     "mason-org/mason.nvim",
@@ -189,7 +191,7 @@ return {
   {
     "idelice/nvim-jls",
     main = "jls",
-    enabled = true,
+    enabled = false,
     ft = { "java" },
     opts = {
       -- jls_dir defaults to the mason package when installed, else the managed
@@ -233,6 +235,10 @@ return {
               local srcs = vim.fn.glob(versdir .. "/*/" .. stem .. "-sources.jar", false, true)
               if srcs[1] then table.insert(doc_path, srcs[1]) end
             end
+          end
+          local out_dir = mod.projectDir .. "/build/classes/java/main"
+          if vim.fn.isdirectory(out_dir) == 1 then
+            table.insert(class_path, out_dir)
           end
         end
         if #class_path == 0 then return nil end
