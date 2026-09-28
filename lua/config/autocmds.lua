@@ -42,6 +42,8 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Noice bypasses vim.lsp.handlers entirely — it replaces vim.lsp.buf.hover
 -- and passes its own callback directly to buf_request. The raw markdown flows
 -- through noice.lsp.format.format_markdown, so that's the right intercept point.
+-- The transform itself is shared with java.lua's focusable-hover handler, which
+-- builds its own float and so never reaches noice.
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyVimStarted",
   once = true,
@@ -50,27 +52,7 @@ vim.api.nvim_create_autocmd("User", {
     if not ok then return end
     local orig = fmt.format_markdown
     fmt.format_markdown = function(contents)
-      local lines = orig(contents)
-      for i, line in ipairs(lines) do
-        -- strip jdt:// markdown links
-        if line:find("jdt://", 1, true) then
-          line = (line:gsub("%[([^%]]+)%]%(jdt://[^%)]*%)", "%1"))
-        end
-        -- normalize table cell padding (column widths were sized for the long URLs)
-        if line:sub(1, 1) == "|" then
-          local cells = vim.split(line, "|", { plain = true })
-          for j, cell in ipairs(cells) do
-            local trimmed = vim.trim(cell)
-            -- keep separator rows (all dashes/colons) as-is for valid markdown
-            cells[j] = (trimmed == "" or trimmed:match("^[%-:]+$"))
-              and cell
-              or (" " .. trimmed .. " ")
-          end
-          line = table.concat(cells, "|")
-        end
-        lines[i] = line
-      end
-      return lines
+      return require("util.jdtls_markdown").clean(orig(contents))
     end
   end,
 })

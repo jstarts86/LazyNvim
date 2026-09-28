@@ -7,6 +7,21 @@ local map = vim.keymap.set
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
+-- Scroll the noice-rendered hover float without entering it. Returns the
+-- native key when no noice float is open, so normal/insert behavior is
+-- untouched (noice.nvim's documented recipe).
+vim.keymap.set({ "n", "i", "s" }, "<c-f>", function()
+  if not require("noice.lsp").scroll(4) then
+    return "<c-f>"
+  end
+end, { silent = true, expr = true })
+
+vim.keymap.set({ "n", "i", "s" }, "<c-b>", function()
+  if not require("noice.lsp").scroll(-4) then
+    return "<c-b>"
+  end
+end, { silent = true, expr = true })
+
 -- Show LSP signature help on demand (auto-popup disabled in options.lua)
 keymap.set({ "n", "i" }, "<C-\\>", function()
   vim.lsp.buf.signature_help()

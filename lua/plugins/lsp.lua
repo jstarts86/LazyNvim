@@ -21,12 +21,6 @@ return {
           },
         },
       },
-      setup = {
-        -- jdtls is handled by nvim-jdtls in lua/plugins/java.lua
-        jdtls = function()
-          return true
-        end,
-      },
     },
   },
   -- {

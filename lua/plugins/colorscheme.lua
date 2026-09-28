@@ -1,14 +1,23 @@
 return {
+  -- tell LazyVim which colorscheme to use (default is tokyonight, which is disabled below)
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "rose-pine",
+    },
+  },
+
   -- THEMES
   {
     "rose-pine/neovim",
+    enabled = true,
     name = "rose-pine",
     lazy = true,
     priority = 1000,
     config = function()
       require("rose-pine").setup({
         dark_variant = "moon",
-        variant = "auto",
+        variant = "dawn",
         dim_inactive_windows = false,
         extend_background_behind_borders = true,
         enable = { terminal = true },
@@ -22,11 +31,11 @@ return {
           -- Visual = { bg = "muted", fg = "gold", inherit = false },
         },
       })
-      vim.cmd("colorscheme rose-pine")
     end,
   },
   {
     "vague-theme/vague.nvim",
+    enabled = false,
     lazy = true, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other plugins
     config = function()
@@ -41,6 +50,7 @@ return {
 
   {
     "craftzdog/solarized-osaka.nvim",
+    enabled = false,
     lazy = true,
     priority = 1000,
     opts = {
@@ -67,6 +77,7 @@ return {
 
   {
     "projekt0n/github-nvim-theme",
+    enabled = false,
     lazy = true,
     priority = 1000,
     config = function()
@@ -76,6 +87,7 @@ return {
 
   {
     "folke/tokyonight.nvim",
+    enabled = false,
     lazy = true,
     priority = 1000,
     opts = {
@@ -92,16 +104,18 @@ return {
   -- AUTO DARK MODE SWITCHER
   {
     "f-person/auto-dark-mode.nvim",
+    enabled = true,
+    lazy = false,
     config = function()
       require("auto-dark-mode").setup({
         update_interval = 1000, -- ms
         set_dark_mode = function()
           vim.o.background = "dark"
-          vim.cmd("colorscheme tokyonight-storm")
+          vim.cmd("colorscheme rose-pine-moon")
         end,
         set_light_mode = function()
           vim.o.background = "light"
-          vim.cmd("colorscheme tokyonight-day")
+          vim.cmd("colorscheme rose-pine-dawn")
         end,
       })
       require("auto-dark-mode").init()
@@ -109,6 +123,7 @@ return {
   },
   {
     "miikanissi/modus-themes.nvim",
+    enabled = false,
     priority = 1000,
     config = function()
       require("modus-themes").setup({
